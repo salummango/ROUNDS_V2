@@ -1,0 +1,124 @@
+/* General Styles */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1,
+h2 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+
+/* Dashboard Styling */
+
+#dashboard-container {
+    width: 950px;
+    margin: 0 auto;
+    padding: 20px;
+    /* background-color: #f9f9f9; */
+    border-radius: 5px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    background-image: url(../image/player1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(5px);
+}
+
+
+/* Fixtures Styling */
+
+#all-team-fixtures {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#all-team-fixtures th,
+#all-team-fixtures td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+#all-team-fixtures th {
+    background-color: black;
+    /* Background color for table header */
+    color: aliceblue;
+}
+
+#all-team-fixtures tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+    /* Background color for even rows */
+}
+
+#all-team-fixtures tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+.fixture-item {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+
+/* Button Styling */
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.active {
+    background-color: #e7f0e8 !important;
+    /* Set the active background color */
+    color: black;
+}
+
+
+/* Initially Hide Other Sections */
+
+.hidden {
+    display: none;
+}
+
+
+/* Animation */
+
+.slide-down {
+    animation: slide-down 0.5s ease-in-out;
+}
+
+@keyframes slide-down {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

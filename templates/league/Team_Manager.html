@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Team Manager Dashboard</title>
+  <link rel="stylesheet" href="{% static './css/Team_Manager.css' %}">
+</head>
+<body>
+  <h2>{{ header_message }}</h2>
+
+  <div class="dashboard-container">
+    <section class="fixtures">
+      <ul class="fixture-list">
+        {% for fixture in all_fixtures %}
+          <li class="fixture-item">
+            <span>{{ fixture.home_team }} vs {{ fixture.away_team }}</span>
+            <span>{{ fixture.match_date }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="fixtures">
+      <ul class="fixture-list">
+        {% for fixture in user_team_fixtures %}
+          <li class="fixture-item">
+            <span>{{ fixture.home_team }} vs {{ fixture.away_team }}</span>
+            <span>{{ fixture.match_date }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

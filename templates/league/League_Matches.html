@@ -1,0 +1,63 @@
+<!-- League_Matches.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Schedule</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Team_Matches.css' %}">
+</head>
+
+<body>
+    <!-- Header, Nav, and other content -->
+    <!-- Search bar for team matches -->
+    <div class="search">
+        <form action="{% url 'team_matches' %}" method="GET">
+            <input type="text" name="team_name" placeholder="Search for a team...">
+            <button type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+            </button>
+        </form>
+    </div>
+    
+    <!-- Content2 Match Results -->
+    <div class="content2" id="result">
+        {% for round_number, round_fixtures in fixtures_by_round.items %}
+        <h1>Round {{ round_number }} MATCHES</h1>
+        {% for fixture in round_fixtures %}
+        <div class="match-card">
+            <div class="match-info">
+                <span>Match Day: {{ fixture.match_date }}</span>
+                <span>Kick-off Time: {{ fixture.kick_off_time }}</span>
+                <span>Stadium: {{ fixture.match_stadium }}</span>
+            </div>
+            <div class="teams">
+                <div class="team">
+                    <img src="{% static 'image/Logomango.png' %}" alt="azam img">
+                    <span>{{ fixture.home_team }}</span>
+                </div>
+                <div class="result">
+                    <span>VS</span>
+                </div>
+                <div class="team">
+                    <img src="{% static 'image/1127342.png' %}" alt="yanga img">
+                    <span>{{ fixture.away_team }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% empty %}
+        <p>No fixtures available</p>
+        {% endfor %}
+    </div>
+
+    
+    <script src="./js/match-result.js"></script>
+</body>
+
+</html>

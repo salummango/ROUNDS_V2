@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>[NBC Premier League] - Welcome</title>
+ 
+  <link rel="stylesheet" href="{% static 'css/login1.css' %}">
+  
+</head>
+<body>
+  <header>
+    <h1>Welcome to NBC Premier League</h1>
+  </header>
+
+  {% comment %} login info {% endcomment %}
+  <div id="logindetails" >
+    <div class="login_box">
+      <form id="login-form" method="POST">
+        {% csrf_token %}
+        <h1>Login</h1>
+        <div class="input_box">
+          <input type="email" name="email" placeholder="Email" required>
+        </div>
+
+        <div class="input_box">
+          <input type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <div class="remember">
+            <input type="checkbox">
+            <label for="">remember me</label>
+        </div>
+
+        <div class="forget"><a href="#">forget password ?</a></div>
+
+        <div class="log">
+          <button type="submit">Login</button>
+        </div>
+
+        <div class="reg">
+            <p>don't have an account <a href="{% url 'register' %}">Register</a></p>
+        </div>
+      </form>
+
+    </div>
+    
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Mango Ltd. All rights reserved.</p>
+  </footer>
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+  $(document).ready(function() {
+    $('#login-form').submit(function(e) {
+        e.preventDefault(); // Prevent form submission
+
+        // Serialize the form data
+        var formData = $(this).serialize();
+
+        // Make the AJAX request to the API endpoint
+        $.ajax({
+            url: '/api/login/', // Replace with your actual API endpoint URL
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                // Handle the successful login
+                console.log(response);
+                alert('Login successful');
+                // Redirect to the appropriate URL
+                window.location.href = '/api/userdashboard'; // Replace with the appropriate URL for the dashboard page
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                // Handle the login error
+                console.log(xhr.responseJSON);
+                var errorData = xhr.responseJSON;
+                var errorMessage = 'Login failed. Please check your credentials.';
+                if (errorData.detail === 'user not found') {
+                    errorMessage = 'User does not exist.';
+                }
+                alert(errorMessage);
+            }
+        });
+    });
+  });
+  
+</script>
+
+</html>

@@ -1,0 +1,146 @@
+/* match-results.css */
+
+.search {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    height: auto;
+}
+
+.search input {
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px 0 #eee, inset 0px -4px 8px 0 #eee;
+    border: solid 3px#eee;
+    padding: 0px 20px 5px 20px;
+}
+
+.search button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    /* Adjust the width as needed */
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: SeaGreen;
+}
+
+.button>svg {
+    width: 20px;
+    height: auto;
+}
+
+.search input:focus {
+    outline: 2px solid MediumSpringGreen;
+}
+
+
+/* Add your existing styles for content2 here */
+
+.content2,
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.content2 {
+    background-image: url(../image/innerpageBg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(5px);
+}
+
+.match-card {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-evenly; */
+}
+
+.match-info {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+    color: #888;
+    gap: 1rem;
+}
+
+.teams {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 1rem;
+    font-size: 2rem;
+}
+
+.team {
+    display: flex;
+    align-items: center;
+}
+
+.team img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.result {
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.details-btn {
+    padding: 5px 10px;
+    background-color: #3f51b5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* Modal styles */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 600px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}

@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Team Manager Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/TeamManager.css' %}">
+</head>
+<body>
+    <div id="dashboard-container">
+        <h1>{{ welcome_message }}</h1>
+
+        <!-- Buttons for Fixture Sections -->
+        <div class="button-container">
+            <button class="button toggle-button active" data-section-id="all-team-fixtures">All Team Fixtures</button>
+            <button class="button toggle-button" data-section-id="user-team-fixtures">My Team's Fixtures</button>
+            <button class="button toggle-button" data-section-id="played-fixtures">Played Fixtures</button>
+            <button class="button toggle-button" data-section-id="non-played-fixtures">Non-Played Fixtures</button>
+            <button class="button toggle-button" data-section-id="next-matches">Next 5 Matches</button>
+            <button class="button toggle-button" data-section-id="previous-matches">Previous 5 Matches</button>
+        </div>
+
+        <!-- Fixture Sections -->
+        <div id="fixture-sections">
+
+            <!-- All Fixtures -->
+            <h2>All Fixtures</h2>
+            <table id="all-team-fixtures" class="fixture-section">
+                <thead>
+                    <tr>
+                        <th>Home Team</th>
+                        <th>Away Team</th>
+                        <th>Match Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fixture in all_fixtures %}
+                        <tr>
+                            <td>{{ fixture.home_team }}</td>
+                            <td>{{ fixture.away_team }}</td>
+                            <td>{{ fixture.match_date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+
+            <!-- Your Team's Fixtures -->
+            <div id="user-team-fixtures" class="fixture-section hidden">
+                <h2>Your Team's Fixtures</h2>
+                <ul>
+                    {% for fixture in user_team_fixtures %}
+                        <li class="fixture-item">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Played Fixtures -->
+            <div id="played-fixtures" class="fixture-section hidden">
+                <h2>Played Fixtures</h2>
+                <ul>
+                    {% for fixture in played_fixtures %}
+                        <li class="fixture-item">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Non-Played Fixtures -->
+            <div id="non-played-fixtures" class="fixture-section hidden">
+                <h2>Non-Played Fixtures</h2>
+                <ul>
+                    {% for fixture in non_played_fixtures %}
+                        <li class="fixture-item">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Next 5 Matches -->
+            <div id="next-matches" class="fixture-section hidden">
+                <h2>Next 5 Matches</h2>
+                <ul>
+                    {% for fixture in next_matches %}
+                        <li class="fixture-item">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Previous 5 Matches -->
+            <div id="previous-matches" class="fixture-section hidden">
+                <h2>Previous 5 Matches</h2>
+                <ul>
+                    {% for fixture in previous_matches %}
+                        <li class="fixture-item">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code for dashboard interactivity
+        // Add event listener to toggle fixture sections
+        document.querySelectorAll('.toggle-button').forEach(button => {
+            button.addEventListener('click', function() {
+                var sectionId = this.dataset.sectionId;
+                var section = document.getElementById(sectionId);
+        
+                // Hide all fixture sections
+                document.querySelectorAll('.fixture-section').forEach(section => {
+                    section.classList.add('hidden');
+                });
+        
+                // Remove active class from all buttons
+                document.querySelectorAll('.toggle-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+        
+                // Show the clicked fixture section
+                section.classList.remove('hidden');
+        
+                // Add active class to the clicked button
+                this.classList.add('active');
+            });
+        });
+        
+    </script>
+
+</body>
+</html>

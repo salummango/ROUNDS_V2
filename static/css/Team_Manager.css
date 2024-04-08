@@ -1,0 +1,44 @@
+                body {
+                font-family: sans-serif;
+                margin: 0;
+                padding: 0;
+                background-image: url("../image/viva.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            
+            h2 {
+                text-align: center;
+                color: white;
+                /* Set header text color to white for contrast */
+            }
+            
+            .dashboard-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                width: 100%;
+            }
+            
+            .fixtures {
+                flex: 1 0 30%;
+                margin: 10px;
+                padding: 15px;
+                border: none;
+                background-color: transparent;
+            }
+            
+            .fixtures h2 {
+                margin-bottom: 10px;
+            }
+            
+            .fixture-list {
+                list-style: none;
+                padding: 0;
+            }
+            
+            .fixture-item {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 5px;
+                font-weight: bold;
