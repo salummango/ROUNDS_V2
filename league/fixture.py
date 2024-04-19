@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 from collections import defaultdict
+import ast  # Import the ast module for safely parsing string literals to Python objects
+import random
 
 from rule.models import Rule
 from users.models import Team
@@ -9,8 +11,9 @@ def load_rules_from_database():
     rules = Rule.objects.all()
     return {rule.name: rule.value for rule in rules}
 
+
 def generate_double_round_robin_fixtures(teams, rules):
-    """Generates a double round robin schedule with dates based on the given teams and rules."""
+    """Generates a double round robin schedule with dates and kick-off times based on the given teams and rules."""
 
     num_teams = len(teams)
     num_rounds = 2 * (num_teams - 1)
@@ -63,7 +66,26 @@ def generate_double_round_robin_fixtures(teams, rules):
                 rotation_index += 1
                 match_date = start_date + timedelta(days=rotation_index)
 
-            round_matches.append((home_team, away_team, match_date.strftime('%Y-%m-%d')))
+            
+            
+            # Retrieve kick-off times from the rules and parse it into a list
+            kick_off_times_str = rules.get('KickOff', '[]')  # Default to empty list if not found
+            kick_off_times = ast.literal_eval(kick_off_times_str)  # Parse the string into a list
+            
+            # Select a random kick-off time from the list
+            
+            kick_off_time = random.choice(kick_off_times)
+
+            # Parse kick_off_time string into a datetime.time object
+            kick_off_time_obj = datetime.strptime(kick_off_time, '%H:%M').time()
+
+            # Combine match_date (date object) with kick_off_time_obj (time object)
+            match_date_with_time = datetime.combine(match_date, kick_off_time_obj)
+
+            # Assign the combined datetime object to match_date
+            match_date = match_date_with_time
+
+            round_matches.append((home_team, away_team, match_date))
             current_week_match_days -= 1
 
         teams = teams[1:] + teams[:1]
