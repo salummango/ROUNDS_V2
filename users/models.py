@@ -2,13 +2,18 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 
 class Team(models.Model):
+    STATUS_CHOICES = (
+        ('active', 'Active'),
+        ('relegate', 'Relegate'),
+    )
     TeamName = models.CharField(max_length=255)
     TeamStadium = models.CharField(max_length=255)
     TeamCity = models.CharField(max_length=255)
+    TeamStatus=models.CharField(max_length=10,choices=STATUS_CHOICES, default='active')
+    TeamLogo = models.ImageField(upload_to='teamlogo', default='logo2.png')
 
     def __str__(self):
         return self.TeamName
-
 
 # Custom user manager
 class CustomUserManager(BaseUserManager):
@@ -52,5 +57,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
 
 

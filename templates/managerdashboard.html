@@ -1,0 +1,551 @@
+{% load static %}
+{% load custom_tags %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>NBC User Page</title>
+    <link rel="stylesheet" href="{% static 'css/managerdashboard.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/AllTeam.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/chat.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/boostrap.min.css' %}">
+
+    <!-- Boxicons CDN Link -->
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class="bx bxl-c-plus-plus"></i>
+            <span class="logo_name">NBC Premear League</span>
+        </div>
+        <ul class="nav-links">
+
+            <button class="sidebar-button active" data-section-id="home">
+                <i class="bx bx-grid-alt"></i>
+                <span>Dashboard</span>
+            </button>
+
+            <button class="sidebar-button" data-section-id="dashboard-container">
+                <i class="bx bx-football"></i>
+                <span>FIXTURE</span>
+            </button>
+
+            <button class="sidebar-button" data-section-id="teams">
+                <i class="bx bx-shirt"></i>
+                <span>ALL TEAM</span>
+            </button>
+
+            <button class="sidebar-button" data-section-id="statistic">
+                <i class="bx bx-chart"></i>
+                <span>STATISTICS</span>
+            </button>
+
+            <button id="logout-button" class="log_out">
+                <i class="bx bx-log-out"></i>
+                <span>Log out</span>
+            </button>
+
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class="bx bx-menu sidebarBtn"></i>
+                <span class="dashboard">Dashboard</span>
+            </div>
+            <div class="search-box" >
+                <form action="{% url 'team_matches' %}" method="GET">
+                    <input type="text" name="team_name" placeholder="Search for a team...">
+                    <button type="submit">
+                        <i class="bx bx-search"></i>
+                    </button>
+                </form>
+            </div>
+            
+            <button class="home-section-button" data-section-id="user-profile">
+                <div class="profile-initial">
+                    <!-- Display the user's profile image -->
+                    <img id="profile-image" src="" alt="" />
+                    <!-- Display the user's name -->
+                    <span id="admin-name" class="admin_name"></span>
+                    <!-- Optionally, you can include a chevron icon for dropdown -->
+                    <i class="bx bx-chevron-down"></i>
+                </div>
+                
+                
+            </button>
+
+        </nav>
+
+        <div class="home-content">
+            <div class="container content mt-5" id="home">
+                <h1>Football Match Calendar - {{ year }} - {{ month }}</h1>
+                <form method="get" class="d-flex align-items-center mb-3">
+                    <div class="form-group mr-2">
+                        <label for="month" class="mr-2">Select Month:</label>
+                        <select id="month" name="month" class="form-control">
+                            {% for num, name in months %}
+                                <option value="{{ num }}" {% if num == month %}selected{% endif %}>{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group mr-2">
+                        <label for="year" class="mr-2">Select Year:</label>
+                        <input type="number" id="year" name="year" value="{{ year }}" class="form-control" min="1900" max="2100">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Go</button>
+                </form>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for week in month_calendar %}
+                        <tr>
+                            {% for day in week %}
+                            {% if day %}
+                            <td{% if day in match_days %} style="background-color: lightblue;"{% endif %}>
+                                <div>{{ day }}</div>
+                                {% if day in match_days %}
+                                    {% for match in match_days|get_item:day %}
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ match.home_logo.url }}" alt="{{ match.home_team }} logo" class="mr-2" style="width: 20px; height: 20px;">
+                                            vs
+                                            <img src="{{ match.away_logo.url }}" alt="{{ match.away_team }} logo" class="ml-2" style="width: 20px; height: 20px;">
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+                            {% else %}
+                            <td></td>
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="dashboard-container" class="content" style="display:none;">
+                
+                <!-- Buttons for Fixture Sections -->
+                <div class=" button-container ">
+                    <button class="button toggle-button active " data-section-id="all-team-fixtures ">All Team Fixtures</button>
+                    <button class="button toggle-button " data-section-id="user-team-fixtures ">My Team's Fixtures</button>
+                    <button class="button toggle-button " data-section-id="played-fixtures ">Played Fixtures</button>
+                    <button class="button toggle-button " data-section-id="non-played-fixtures ">Non-Played Fixtures</button>
+                    <button class="button toggle-button " data-section-id="next-matches">Next 5 Matches</button>
+                    <button class="button toggle-button " data-section-id="previous-matches">Previous 5 Matches</button>
+                </div>
+
+                <!-- Fixture Sections -->
+                <div id="fixture-sections">
+
+                    <!-- All Fixtures -->
+                    
+                    <table id="all-team-fixtures" class="fixture-section">
+                        <thead>
+                            <tr>
+                                <th>Home Team</th>
+                                <th>Away Team</th>
+                                <th>Match Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fixture in all_fixtures %}
+                            <tr>
+                                <td>{{ fixture.home_team }}</td>
+                                <td>{{ fixture.away_team }}</td>
+                                <td>{{ fixture.match_date }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                    <!-- Your Team's Fixtures -->
+                    <div id="user-team-fixtures " class="fixture-section hidden">
+                        <h2 class="mb-4">Your Team's Fixtures</h2>
+                        <ul class="list-group">
+                            {% for fixture in user_team_fixtures %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ fixture.home_logo.url }}" alt="{{ fixture.home_team }}" class="team-logo me-2">
+                                    <span>{{ fixture.home_team }}</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <span>{{ fixture.away_team }}</span>
+                                    <img src="{{ fixture.away_logo.url }}" alt="{{ fixture.away_team }}" class="team-logo ms-2">
+                                </div>
+                                <span class="badge bg-primary">{{ fixture.match_date|date:"D d M Y H:i" }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Played Fixtures -->
+                    <div id="played-fixtures " class="fixture-section hidden ">
+                        <h2>Played Fixtures</h2>
+                        <ul>
+                            {% for fixture in played_fixtures %}
+                            <li class="fixture-item ">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Non-Played Fixtures -->
+                    <div id="non-played-fixtures " class="fixture-section hidden ">
+                        <h2>Non-Played Fixtures</h2>
+                        <ul>
+                            {% for fixture in non_played_fixtures %}
+                            <li class="fixture-item ">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Next 5 Matches -->
+                    <div id="next-matches " class="fixture-section hidden ">
+                        <h2>Next 5 Matches</h2>
+                        <ul>
+                            {% for fixture in next_matches %}
+                            <li class="fixture-item ">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Previous 5 Matches -->
+                    <div id="previous-matches " class="fixture-section hidden ">
+                        <h2>Previous 5 Matches</h2>
+                        <ul>
+                            {% for fixture in previous_matches %}
+                            <li class="fixture-item ">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="teams" class="content" style="display:none;">
+                <h1>All Team List  (Total: {{ total_teams }})</h1>
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Team Logo</th>
+                            <th>Team Name</th>
+                            <th>Team Stadium</th>
+                            <th>Team City</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for team in teams %}
+                        <tr>
+                            <td><img src="{{ team.TeamLogo.url }}" alt="Team Logo"></td>
+                            <td>{{ team.TeamName }}</td>
+                            <td>{{ team.TeamStadium }}</td>
+                            <td>{{ team.TeamCity }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+            </div>
+
+            <!-- USER PROFILE SECTION  -->
+            <div class="profile content" id="user-profile" style="display:none;">
+                <div class="container">
+                    <h2>Profile</h2>
+                    <div class="card">
+                        <div class="card-body user-info">
+                            
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button id="updating" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+                
+                
+                {% comment %} Registration info {% endcomment %}
+                <div id="updates" style="display: none;">
+                    <div class="popup-content">
+                        <div class="update-container">
+                            <div class="title">Updating</div>
+
+                            <div class="form-inner">
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="field">
+                                        <label>First Name</label>
+                                        <input type="text" name="first_name" placeholder="First Name" required pattern="[A-Za-z]+" title="First name can only contain alphabetic characters">
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Last Name</label>
+                                        <input type="text" name="last_name" placeholder="Last Name" required pattern="[A-Za-z]+" title="Last name can only contain alphabetic characters">
+                                    </div>
+
+                                    <div class="field">
+                                        <label>E-mail</label>
+                                        <input type="email" name="email" placeholder="Email" required title="Invalid email address">
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Phone number</label>
+                                        <input type="tel" name="phoneNo" placeholder="Phone Number" required title="Invalid phone number">
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Profile Picture</label>
+                                        <input type="file" name="userImage" placeholder="Upload Image" accept=".jpg,.png" required>
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Password</label>
+                                        <input type="password" name="password" placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character">
+                                    </div>
+
+                                    <div class="btn-layer">
+                                        <button id="closing">cancel</button>
+                                        <button id="update">Confirm</button>
+                                    </div>
+
+                                </form>
+                                <div id="error-message" style="color: red;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="container mt-5 content"  id="statistic"  style="display:none;">
+                <h2>Statistics</h2>
+
+                <!-- Chart to display cities with the quantity of teams -->
+                <div>
+                    <img src="{{ MEDIA_URL }}charts/teams_by_city_plot.png" alt="Teams by City" width="800">
+                    <img src="{{ MEDIA_URL }}charts/teams_by_city_pie_chart.png" alt="Teams by City" width="800">
+                </div>
+
+                <div>
+                    <h2>Teams with First and Last Matches at Home:</h2>
+                    <ul>
+                        {% for team in first_and_last_home_teams %}
+                            <li>{{ team }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h2>Teams with First and Last Matches Away:</h2>
+                    <ul>
+                        {% for team in first_and_last_away_teams %}
+                            <li>{{ team }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h2>Teams with First and Last Matches Either Home or Away:</h2>
+                    <ul>
+                        {% for team in first_and_last_either_teams %}
+                            <li>{{ team }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/user_dashboard.js' %}"></script>
+    {% comment %} <script src="{% static 'js/chat.js' %}"></script> {% endcomment %}
+    <script src="{% static 'js/logout.js' %}"></script>
+    {% comment %} <script src="{% static 'js/search-result.js' %}"></script> {% endcomment %}
+
+    <script>
+
+        let sidebar = document.querySelector(".sidebar ");
+        let sidebarBtn = document.querySelector(".sidebarBtn ");
+        sidebarBtn.onclick = function() {
+            sidebar.classList.toggle("active ");
+            if (sidebar.classList.contains("active ")) {
+                sidebarBtn.classList.replace("bx-menu ", "bx-menu-alt-right ");
+            } else sidebarBtn.classList.replace("bx-menu-alt-right ", "bx-menu ");
+        };
+
+        // Add event listener to toggle fixture sections
+        document.querySelectorAll('.toggle-button').forEach(button => {
+            button.addEventListener('click', function() {
+                var sectionId = this.dataset.sectionId;
+                var section = document.getElementById(sectionId);
+
+                // Hide all fixture sections
+                document.querySelectorAll('.fixture-section').forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                // Remove active class from all buttons
+                document.querySelectorAll('.toggle-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Show the clicked fixture section
+                section.classList.remove('hidden');
+
+                // Add active class to the clicked button
+                this.classList.add('active');
+            });
+        });
+        
+
+
+        // Add event listener to sidebar buttons
+        document.querySelectorAll('.sidebar-button').forEach(button => {
+            button.addEventListener('click', function() {
+                var sectionId = this.dataset.sectionId;
+                var section = document.getElementById(sectionId);
+
+                // Hide all content sections
+                document.querySelectorAll('.content').forEach(content => {
+                    content.style.display = 'none';
+                });
+
+                // Remove active class from all buttons
+                document.querySelectorAll('.sidebar-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Show the clicked content section
+                section.style.display = 'block';
+
+                // Add active class to the clicked button
+                this.classList.add('active');
+            });
+        });
+
+        
+
+        // Add event listener to home(profile) buttons
+        document.querySelectorAll('.home-section-button').forEach(button => {
+            button.addEventListener('click', function() {
+                var sectionId = this.dataset.sectionId;
+                var section = document.getElementById(sectionId);
+
+                // Hide all content sections
+                document.querySelectorAll('.content').forEach(content => {
+                    content.style.display = 'none';
+                });
+
+                // Remove active class from all buttons
+                document.querySelectorAll('.home-section-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Show the clicked content section
+                section.style.display = 'block';
+
+                // Add active class to the clicked button
+                this.classList.add('active');
+            });
+        });
+
+        // Add event listener to chat radio
+        document.querySelectorAll('.nav-item').forEach(radio => {
+            radio.addEventListener('click', function() {
+                var sectionId = this.dataset.sectionId;
+                var section = document.getElementById(sectionId);
+
+                // Hide all content sections
+                document.querySelectorAll('.contents').forEach(content => {
+                    content.style.display = 'none';
+                });
+
+                // Remove active class from all buttons
+                document.querySelectorAll('.nav-item').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Show the clicked content section
+                section.style.display = 'block';
+
+                // Add active class to the clicked button
+                this.classList.add('active');
+            });
+        });
+        
+            // Fetch CSRF token from the cookie
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+        
+            var csrftoken = getCookie('csrftoken');
+            console.log(csrftoken);
+        
+            console.log('hello2')
+        
+
+    
+        
+            // Update user account
+            $('#update').click(function() {
+                var updatedUserDetails = new FormData();
+                updatedUserDetails.append('first_name', $('#first_name').val());
+                updatedUserDetails.append('last_name', $('#last_name').val());
+                updatedUserDetails.append('email', $('#email').val());
+                updatedUserDetails.append('phoneNo', $('#phoneNo').val());
+                updatedUserDetails.append('password', $('#password').val());
+                updatedUserDetails.append('userImage', $('#userImage')[0].files[0]);
+        
+                $.ajax({
+                    url: '/api/putdelete',
+                    type: 'PUT',
+                    data: updatedUserDetails,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('X-CSRFToken', csrftoken);
+                    },
+                    success: function(response) {
+                        alert('User account updated successfully.');
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.log(xhr.responseJSON);
+                        alert('Failed to update user account.');
+                    }
+                });
+            });
+
+
+        
+    </script>
+</body>
+
+</html>

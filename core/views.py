@@ -10,7 +10,8 @@ def home(request):
     return render(request=request,template_name="index.html")
 
 def regist(request):
-    return render(request=request,template_name="user/registration.html")
+    return render(request=request,template_name="user/register.html")
+
 
 
 # def download_nltk_resources():

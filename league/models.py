@@ -8,7 +8,9 @@ class Fixture(models.Model):
     match_date = models.DateTimeField()  # Change from DateField to DateTimeField
     round_number = models.IntegerField(default=1)
     match_stadium=models.CharField(max_length=180 )
-    match_city=models.CharField(max_length=180 )
+    # match_city=models.CharField(max_length=180 )
+    home_logo=models.ImageField(upload_to='calendar', default='logo2.png')
+    away_logo=models.ImageField(upload_to='calendar', default='logo2.png')
     
 
     def __str__(self):

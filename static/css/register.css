@@ -1,0 +1,311 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    /* gap: 2px; */
+    width: 70%;
+    background-color: #f2f2f2;
+    padding: 5px 20px;
+    border-radius: 20px;
+    margin: auto;
+}
+
+body {
+    background-image: url(../image/logo3.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(3px);
+    opacity: 0.9;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    width: 90%;
+    /* background-color: #f2f2f2; */
+    padding: 20px;
+    border-radius: 20px;
+    margin: 0 auto;
+    height: 23rem;
+}
+
+.personal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 48%;
+    /* background-color: #eeebeb; */
+    padding: 30px;
+    border-radius: 20px;
+    height: 18rem;
+}
+
+.team {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 40%;
+    /* background-color: #eeebeb; */
+    padding: 10px;
+    border-radius: 20px;
+    height: 15rem;
+}
+
+.title {
+    font-size: 28px;
+    color: royalblue;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    /* background-color: black; */
+    margin-top: 0.2px;
+}
+
+.title::before,
+.title::after {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 0px;
+    background-color: royalblue;
+}
+
+.title::before {
+    width: 18px;
+    height: 18px;
+    background-color: royalblue;
+}
+
+.title::after {
+    width: 18px;
+    height: 18px;
+    animation: pulse 1s linear infinite;
+}
+
+.signin {
+    /* color: rgba(88, 87, 87, 0.822); */
+    font-size: 16px;
+    color: black;
+}
+
+.signin {
+    text-align: center;
+}
+
+.signin a {
+    color: solid royalblue;
+    font-size: 18px;
+}
+
+.signin a:hover {
+    text-decoration: underline royalblue;
+}
+
+.flex {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.form label {
+    position: relative;
+}
+
+.form label .input {
+    width: 100%;
+    padding: 10px 10px 20px 10px;
+    outline: 0;
+    border: 3px solid rgb(134, 193, 245);
+    border-radius: 15px;
+    font-size: 20px;
+}
+
+.form .input:focus {
+    border-color: #1a75ff;
+}
+
+.form label .input+span {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    color: black;
+    font-size: 1.5em;
+    cursor: text;
+    transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown+span {
+    top: 15px;
+    font-size: 1.5em;
+}
+
+.form label .input:focus+span,
+.form label .input:valid+span {
+    top: 40px;
+    font-size: 1em;
+    font-weight: 600;
+    color: royalblue;
+}
+
+.form label .input:valid+span {
+    color: green;
+}
+
+.submit {
+    border: none;
+    outline: none;
+    background-color: royalblue;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    transform: .3s ease;
+    margin-top: 5px;
+    width: 150px;
+}
+
+.submit:hover {
+    background-color: rgb(56, 90, 194);
+    cursor: pointer;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+    to {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+
+@media only screen and (max-width: 600px) {
+    .form {
+        display: flex;
+        flex-direction: column;
+        /* gap: 2px; */
+        width: 100%;
+        background-color: #f2f2f2;
+        padding: 2px;
+        border-radius: 20px;
+        margin: auto;
+        /* background-color: #703030; */
+        height: auto;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        width: 90%;
+        background-color: #f2f2f2;
+        padding: 10px;
+        border-radius: 20px;
+        margin: 0 auto;
+        height: auto;
+    }
+    .personal {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 95%;
+        /* background-color: #180707; */
+        padding: 5px;
+        border-radius: 20px;
+        height: auto;
+    }
+    .team {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 90%;
+        /* background-color: #773535; */
+        padding: 10px;
+        border-radius: 20px;
+        height: auto;
+    }
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 90%;
+        background-color: #f2f2f2;
+        padding: 2px;
+        border-radius: 20px;
+        margin: 50px auto;
+        /* background-color: #703030; */
+        height: auto;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        width: 90%;
+        /* background-color: #f2f2f2; */
+        padding: 10px;
+        border-radius: 20px;
+        margin: 0 auto;
+        height: auto;
+    }
+    .personal {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 95%;
+        /* background-color: #180707; */
+        padding: 10px;
+        border-radius: 20px;
+        height: auto;
+    }
+    .team {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 90%;
+        /* background-color: #773535; */
+        padding: 10px;
+        border-radius: 20px;
+        height: 15rem;
+        /* margin-top: 10px; */
+    }
+    .flex {
+        display: flex;
+        width: 100%;
+        gap: 28px;
+    }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+
+@media only screen and (min-width: 768px) {}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+
+@media only screen and (min-width: 992px) {}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+
+@media only screen and (min-width: 1200px) {}

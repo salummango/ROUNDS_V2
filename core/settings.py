@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users',
     'rule',
     'league',
+    'django_extensions',
 
 ]
 
@@ -56,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'users.middleware.JWTAuthenticationMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -63,7 +66,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'''C:\Users\user\Desktop\Round_V2\templates'''],
+        'DIRS': [r'''C:\Users\user\Desktop\RoundAPIv2\templates'''],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,6 +119,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
 
 
 # Internationalization

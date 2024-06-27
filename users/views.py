@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from rest_framework import status
 from django.contrib.auth.hashers import make_password
 from users.models import User
-from rest_framework.parsers import MultiPartParser
+from rest_framework.parsers import MultiPartParser, FormParser
 from django.urls import reverse
 from django.contrib.auth import authenticate, login
 
@@ -26,25 +26,22 @@ from django.contrib.auth import authenticate, login
 #         return redirect(reverse('login'))
 
 from rest_framework.exceptions import APIException
-
+from django.core.exceptions import ValidationError
 class RegisterUser(APIView):
-    parser_classes = [MultiPartParser]
+    parser_classes = [MultiPartParser, FormParser]
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         serializer = UserSerializer(data=request.data)
         try:
             serializer.is_valid(raise_exception=True)
-        except APIException as e:
-            # If validation fails, return detailed error message
-            return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            # Return detailed error message
+            return Response({'errors': serializer.errors, 'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Save the user if validation passes
         serializer.save()
-
-        # Return success message
         return Response({'message': 'User registered successfully'}, status=status.HTTP_201_CREATED)
 
-
+from django.conf import settings
 class LoginUser(APIView):
     def post(self, request):
         email = request.data.get('email')
@@ -63,7 +60,7 @@ class LoginUser(APIView):
             'iat': datetime.datetime.utcnow()
         }
         
-        token = jwt.encode(payload, 'secrete', algorithm='HS256')
+        token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
 
         # Returning token via JSON response
         response = JsonResponse({'jwt': token})
@@ -74,7 +71,7 @@ class LoginUser(APIView):
     def get(self, request):
         # Handle GET requests for login page
         # Return the HTML template for the login page
-        return render(request, 'user/login.html')
+        return render(request, 'index.html')
 
 class LogoutUser(APIView):
     def post(self, request):
@@ -83,7 +80,7 @@ class LogoutUser(APIView):
         response.data = {
             'message': 'Successfully logged out'
         }
-        return redirect('/')
+        return response
     
 
 class UserView(APIView):
@@ -94,7 +91,7 @@ class UserView(APIView):
             raise AuthenticationFailed('unauthenticated')
         
         try:
-            payload = jwt.decode(token, 'secrete', algorithms=['HS256'])
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed('unauthenticated')
         
@@ -141,9 +138,18 @@ class UserView(APIView):
             
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import User
+from .serializers import UserSerializer
+
+class AllUser(APIView):
+    def get(self, request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)  # Use many=True for multiple instances
+        return Response(serializer.data)
 
 
-def userdashboard(request):
-    return render(request=request,template_name="user/user_dashboard.html")
+
 
 

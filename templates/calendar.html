@@ -1,0 +1,73 @@
+{% load custom_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Football Match Calendar</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Football Match Calendar - {{ year }} - {{ month }}</h1>
+        <form method="get" class="form-inline mb-3">
+            <div class="form-group">
+                <label for="month" class="mr-2">Select Month:</label>
+                <select id="month" name="month" class="form-control mr-2">
+                    {% for num, name in months %}
+                        <option value="{{ num }}" {% if num == month %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="year" class="mr-2">Select Year:</label>
+                <input type="number" id="year" name="year" value="{{ year }}" class="form-control mr-2" min="1900" max="2100">
+            </div>
+            <button type="submit" class="btn btn-primary">Go</button>
+        </form>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for week in month_calendar %}
+                <tr>
+                    {% for day in week %}
+                    {% if day %}
+                    {% with day_match=match_days|get_item:day %}
+                    <td{% if day_match %} style="background-color: lightblue;"{% endif %}>
+                        <div>{{ day }}</div>
+                        {% if day_match %}
+                            {% for match in day_match %}
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ match.home_logo.url }}" alt="{{ match.home_team }} logo" class="mr-2" style="width: 20px; height: 20px;">
+                                    vs
+                                    <img src="{{ match.away_logo.url }}" alt="{{ match.away_team }} logo" class="ml-2" style="width: 20px; height: 20px;">
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                    {% endwith %}
+                    {% else %}
+                    <td></td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

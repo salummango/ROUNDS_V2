@@ -25,12 +25,14 @@ from rest_framework import serializers
 from .models import User, Team
 
 class TeamSerializer(serializers.ModelSerializer):
+    TeamLogo=serializers.ImageField(required=True)
     class Meta:
         model = Team
-        fields = ['id', 'TeamName', 'TeamStadium', 'TeamCity']
+        fields = ['id', 'TeamName', 'TeamStadium', 'TeamCity','TeamLogo']
 
 class UserSerializer(serializers.ModelSerializer):
     userImage = serializers.ImageField(required=True)
+    
     team = TeamSerializer()  # Nested serializer for Team
     
     class Meta:
@@ -59,3 +61,5 @@ class UserSerializer(serializers.ModelSerializer):
         if password:
             instance.password = make_password(password)
         return super().update(instance, validated_data)
+
+

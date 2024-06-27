@@ -15,10 +15,11 @@ def insert_initial_data(apps, schema_editor):
         {
             "name": "LeagueStartDate",
             "value": "2024-01-05"
-        },{
+        },
+        {
           "name": "KickOff",  # New rule
-          "value": ["14:00", "15:30", "18:00"]  # Example kick-off time (2:00 PM)
-      }
+          "value": ["14:00", "15:30", "18:00"] # Example kick-off time (2:00 PM)
+        }
     ]
     for data in initial_data:
         Rule.objects.create(name=data['name'], value=data['value'])

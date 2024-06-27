@@ -19,9 +19,12 @@ def generate_fixtures(modeladmin, request, queryset):
             home_team, away_team,  match_date = match
             
             # Determine the stadium and city for the fixture
-            match_stadium = home_team.stadium  # assign each team with it's stadium
-            match_city = home_team.city  # assign each team with it's city
+            match_stadium = home_team.TeamStadium  # assign each team with it's stadium
+            # match_city = home_team.city  # assign each team with it's city
             
+            #assigning logos for team to be used on calendar
+            home_logo=home_team.TeamLogo
+            away_logo=away_team.TeamLogo
             
             fixture = Fixture(
                 home_team=home_team,
@@ -29,7 +32,9 @@ def generate_fixtures(modeladmin, request, queryset):
                 match_date=match_date,
                 round_number=round_num,  
                 match_stadium=match_stadium,
-                match_city=match_city,
+                # match_city=match_city,
+                home_logo=home_logo,
+                away_logo=away_logo,
                 
             )
             fixture.save()
@@ -46,8 +51,8 @@ class FixtureResource(resources.ModelResource):#This class specifies the model t
 
 class FixtureAdmin(ImportExportModelAdmin):
     resource_class = FixtureResource
-    search_fields = ['home_team', 'away_team', 'match_date','match_stadium','match_city']
-    list_display = ['round_number', 'id',  'home_team', 'away_team', 'match_date','match_stadium','match_city']
+    search_fields = ['home_team', 'away_team', 'match_date','match_stadium']
+    list_display = ['round_number', 'id',  'home_team', 'away_team', 'match_date','match_stadium']
     ordering = ['round_number', 'id']
 
 

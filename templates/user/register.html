@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/register.css' %}">
+        <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <title>Register</title>
+    </head>
+    <body>
+        <form class="form" id="register-form" method="POST" enctype="multipart/form-data">
+            <p class="title">Register </p>
+            {% csrf_token %}
+            <div class="container">
+                <div class="personal">
+                    <div class="flex">
+                        <label>
+                            <input type="text" name="first_name" placeholder="" required pattern="[A-Za-z]+" title="First name can only contain alphabetic characters" class="input">
+                            <span>First name</span>
+                        </label>
+        
+                        <label>
+                            <input type="text" name="last_name" placeholder="" required pattern="[A-Za-z]+" title="Last name can only contain alphabetic characters" class="input">
+                            <span>Last name</span>
+                        </label>
+                    </div>
+        
+                    <label>
+                        <input type="email" name="email" placeholder="" required title="Invalid email address" class="input">
+                        <span>Email</span>
+                    </label>
+        
+                    <label>
+                        <input type="tel" name="phoneNo" placeholder="" required title="Invalid phone number" class="input">
+                        <span>Phone Number</span>
+                    </label>
+        
+                    <label>
+                        <input type="file" name="userImage" placeholder="" accept=".jpg,.png" required class="input">
+                        <span>Upload Image</span>
+                    </label>
+        
+                    <label>
+                        <input type="password" id="password-input" name="password" placeholder="" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" class="input">
+                        <span>Password</span>
+                        <i id="toggle-password" class="bx bx-show"></i>
+                    </label>
+                </div>
+        
+                <div class="team">
+                    <label>
+                        <input type="text" name="team[TeamName]" placeholder="" required class="input">
+                        <span>Team Name</span>
+                    </label>
+        
+                    <label>
+                        <input type="text" name="team[TeamStadium]" placeholder="" required class="input">
+                        <span>Team Stadium</span>
+                    </label>
+                    <label>
+                        <input type="text" name="team[TeamCity]" placeholder="" required class="input">
+                        <span>Team City</span>
+                    </label>
+                    <label>
+                        <input type="file" name="team[TeamLogo]" placeholder="" accept=".jpg,.png" required class="input">
+                        
+                    </label>
+                </div>
+            </div>
+            <center>
+                <button class="submit">Submit</button>
+            </center>
+        
+            <p class="signin">Already have an acount ? <a href="{% url 'login' %}">Signin</a> </p>
+        </form>
+    </body>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#register-form').submit(function(e) {
+                e.preventDefault(); // Prevent form submission
+                
+                var formData = new FormData(this);
+                var csrfToken = "{{ csrf_token }}";
+                var teamLogoInput = $('[name="team[TeamLogo]"]')[0].files[0];
+        
+                // Directly append team fields to formData
+                formData.append('team.TeamName', $('[name="team[TeamName]"]').val());
+                formData.append('team.TeamStadium', $('[name="team[TeamStadium]"]').val());
+                formData.append('team.TeamCity', $('[name="team[TeamCity]"]').val());
+                formData.append('team.TeamLogo', teamLogoInput);
+
+                
+    
+                // Make the AJAX request to the API endpoint
+                $.ajax({
+                    headers: { "X-CSRFToken": csrfToken },
+                    url: '/api/registration',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        // Handling the successful registration response
+                        console.log(response);
+                        alert('Registration successful');
+                        window.location.href = '{% url 'login' %}';
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle the registration error
+                        console.log(xhr.responseText);
+                        var errorMessage = "An error occurred: " + xhr.status + " " + xhr.statusText + "\n" + xhr.responseText;
+                        console.log(errorMessage);
+                        alert(errorMessage);  // Display error details
+
+                    }
+                });
+            });
+
+            // Get references to the password input field and the eye icon
+            const passwordInput = document.getElementById('password-input');
+            const togglePassword = document.getElementById('toggle-password');
+
+            // Add click event listener to the eye icon
+            togglePassword.addEventListener('click', function() {
+                // Toggle the type attribute of the password input field between 'password' and 'text'
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+
+                // Toggle the eye icon's class between 'bx-show' and 'bx-hide' to change the icon
+                togglePassword.classList.toggle('bx-show');
+                togglePassword.classList.toggle('bx-hide');
+            });
+
+        });
+    </script>
+
+</html>
