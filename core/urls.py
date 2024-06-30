@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('users.urls')),
     path('api/',include('league.urls')),
+    path('leaguehistory/', include('LeagueHistory.urls')),
     
     
     path('',views.home,name='home'),

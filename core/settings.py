@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rule',
     'league',
     'django_extensions',
+    'LeagueHistory'
 
 ]
 

@@ -43,7 +43,40 @@ def generate_fixtures(modeladmin, request, queryset):
 generate_fixtures.short_description = "Generate fixtures"
 
 
-   
+import os
+import csv
+from django.conf import settings
+from .models import Fixture
+from LeagueHistory.models import HistoricalFixtureFile
+
+def export_fixtures_to_history(modeladmin, request, queryset):
+    # Determine the earliest and latest years in the selected fixtures
+    years = queryset.dates('match_date', 'year')
+    if not years:
+        modeladmin.message_user(request, "No fixtures selected.", level='error')
+        return
+    
+    start_year = years[0].year
+    end_year = years[len(years) - 1].year
+
+    csv_filename = os.path.join(settings.MEDIA_ROOT, 'historical_fixtures', f'fixtures_{start_year}_{end_year}.csv')
+    os.makedirs(os.path.dirname(csv_filename), exist_ok=True)
+
+    with open(csv_filename, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['home_team', 'away_team', 'match_date', 'round_number', 'match_stadium'])
+        for fixture in queryset:
+            writer.writerow([fixture.home_team, fixture.away_team, fixture.match_date, fixture.round_number, fixture.match_stadium, fixture.home_logo.url, fixture.away_logo.url])
+
+    # Save the file reference in HistoricalFixtureFile model
+    HistoricalFixtureFile.objects.create(file=f'historical_fixtures/fixtures_{start_year}_{end_year}.csv')
+
+    modeladmin.message_user(request, "Successfully exported fixtures to history.")
+
+export_fixtures_to_history.short_description = "Export selected fixtures to history"
+
+
+
 
 class FixtureResource(resources.ModelResource):#This class specifies the model to be used for importing and exporting data.
     class Meta:
@@ -54,6 +87,7 @@ class FixtureAdmin(ImportExportModelAdmin):
     search_fields = ['home_team', 'away_team', 'match_date','match_stadium']
     list_display = ['round_number', 'id',  'home_team', 'away_team', 'match_date','match_stadium']
     ordering = ['round_number', 'id']
+    actions = [export_fixtures_to_history]
 
 
 admin.site.register(Fixture,FixtureAdmin)
