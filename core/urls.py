@@ -18,9 +18,13 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from .views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/logout/', LogoutView.as_view(), name='admin_logout'),
+    path('accounts/', include('django.contrib.auth.urls')),  # Ensure auth URLs are included
+    
     path('api/',include('users.urls')),
     path('api/',include('league.urls')),
     path('leaguehistory/', include('LeagueHistory.urls')),

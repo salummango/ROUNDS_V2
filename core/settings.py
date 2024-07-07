@@ -175,11 +175,21 @@ JAZZMIN_SETTINGS ={
     # Logo to use for your site, must be present in static files, used for brand on top left
     "site_logo": "image/player2.png",
     
+    # logo
+    'login_logo':None,
     # CSS classes that are applied to the logo above
     "site_logo_classes": "img-circle",
     
     # Copyright on the footer
     "copyright": "Mango Ltd",
+    
+    # adding language choice
+    # 'language_chooser':True,
+    
+    # 'topmenu_links': [
+    #     {'name': 'Home', 'url': 'admin:index', 'permissions': ['auth.view_user']},
+    #     {'name': 'Logout', 'url': 'admin:logout', 'new_window': False},
+    # ],
 
 
 }

@@ -8,41 +8,88 @@ from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 from datetime import datetime
 from django.utils import timezone
+from .AIFixture import generate_data_mined_fixtures,load_historical_data
 
-def generate_fixtures(modeladmin, request, queryset):
-    teams = queryset.all()
-    rules = {rule.name: rule.value for rule in Rule.objects.all()}
-    fixtures, start_date = generate_double_round_robin_fixtures(teams, rules)
+# def generate_fixtures(modeladmin, request, queryset):
+#     teams = queryset.all()
+#     rules = {rule.name: rule.value for rule in Rule.objects.all()}
+#     fixtures, start_date = generate_double_round_robin_fixtures(teams, rules)
 
-    for round_num, round_matches in enumerate(fixtures, start=1):
-        for match in round_matches:
-            home_team, away_team,  match_date = match
+#     for round_num, round_matches in enumerate(fixtures, start=1):
+#         for match in round_matches:
+#             home_team, away_team,  match_date = match
             
-            # Determine the stadium and city for the fixture
-            match_stadium = home_team.TeamStadium  # assign each team with it's stadium
-            # match_city = home_team.city  # assign each team with it's city
+#             # Determine the stadium and city for the fixture
+#             match_stadium = home_team.TeamStadium  # assign each team with it's stadium
+#             # match_city = home_team.city  # assign each team with it's city
             
-            #assigning logos for team to be used on calendar
-            home_logo=home_team.TeamLogo
-            away_logo=away_team.TeamLogo
+#             #assigning logos for team to be used on calendar
+#             home_logo=home_team.TeamLogo
+#             away_logo=away_team.TeamLogo
             
-            fixture = Fixture(
-                home_team=home_team,
-                away_team=away_team,
-                match_date=match_date,
-                round_number=round_num,  
-                match_stadium=match_stadium,
-                # match_city=match_city,
-                home_logo=home_logo,
-                away_logo=away_logo,
+#             fixture = Fixture(
+#                 home_team=home_team,
+#                 away_team=away_team,
+#                 match_date=match_date,
+#                 round_number=round_num,  
+#                 match_stadium=match_stadium,
+#                 # match_city=match_city,
+#                 home_logo=home_logo,
+#                 away_logo=away_logo,
                 
-            )
-            fixture.save()
+#             )
+#             fixture.save()
+#     modeladmin.message_user(request, "Your fixtures are Successfully generated.")
 
 
-generate_fixtures.short_description = "Generate fixtures"
+# generate_fixtures.short_description = "Generate fixtures normal"
+
+# # FOR DATAMINING
+# def generate_fixture(modeladmin, request, queryset):
+#     teams = queryset.all()
+#     rules = {rule.name: rule.value for rule in Rule.objects.all()}
+#     historical_data = load_historical_data()
+#     fixtures, start_date = generate_data_mined_fixtures(teams, rules, historical_data)
+
+#     for round_num, round_matches in enumerate(fixtures, start=1):
+#         for match in round_matches:
+#             home_team, away_team,  match_date = match
+            
+#             # Determine the stadium and city for the fixture
+#             match_stadium = home_team.TeamStadium  # assign each team with it's stadium
+#             # match_city = home_team.city  # assign each team with it's city
+            
+#             #assigning logos for team to be used on calendar
+#             home_logo=home_team.TeamLogo
+#             away_logo=away_team.TeamLogo
+            
+#             fixture = Fixture(
+#                 home_team=home_team,
+#                 away_team=away_team,
+#                 match_date=match_date,
+#                 round_number=round_num,  
+#                 match_stadium=match_stadium,
+#                 # match_city=match_city,
+#                 home_logo=home_logo,
+#                 away_logo=away_logo,
+                
+#             )
+#             fixture.save()
+#     modeladmin.message_user(request, "Your fixtures are Successfully generated.")
 
 
+# generate_fixture.short_description = "Generate fixtures by History"
+
+# from league.AIFixture import load_historical_data, count_team_appearances_across_years
+# from django.shortcuts import render
+# def display_team_statistics(self, request, queryset):
+#         historical_data = load_historical_data()
+#         team_years_count = count_team_appearances_across_years(historical_data)
+#         context = {'team_years_count': team_years_count}
+#         return render(request, 'admin/team_statistics.html', context)
+
+# display_team_statistics.short_description = "Display Team Appearance Statistics"
+    
 import os
 import csv
 from django.conf import settings
@@ -66,7 +113,7 @@ def export_fixtures_to_history(modeladmin, request, queryset):
         writer = csv.writer(csvfile)
         writer.writerow(['home_team', 'away_team', 'match_date', 'round_number', 'match_stadium'])
         for fixture in queryset:
-            writer.writerow([fixture.home_team, fixture.away_team, fixture.match_date, fixture.round_number, fixture.match_stadium, fixture.home_logo.url, fixture.away_logo.url])
+            writer.writerow([fixture.home_team, fixture.away_team, fixture.match_date, fixture.round_number, fixture.match_stadium])
 
     # Save the file reference in HistoricalFixtureFile model
     HistoricalFixtureFile.objects.create(file=f'historical_fixtures/fixtures_{start_year}_{end_year}.csv')

@@ -13,6 +13,16 @@ def regist(request):
     return render(request=request,template_name="user/register.html")
 
 
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.views import View
+
+class LogoutView(View):
+    def post(self, request):
+        logout(request)
+        return redirect('/admin/login/')
+
+
 
 # def download_nltk_resources():
 #     nltk.download('punkt')
