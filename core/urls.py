@@ -24,13 +24,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin/logout/', LogoutView.as_view(), name='admin_logout'),
     path('accounts/', include('django.contrib.auth.urls')),  # Ensure auth URLs are included
+    path('tinymce/',include('tinymce.urls')),
     
     path('api/',include('users.urls')),
     path('api/',include('league.urls')),
+    path('api/',include('Letter.urls')),
     path('leaguehistory/', include('LeagueHistory.urls')),
     
-    
-    path('',views.home,name='home'),
+    path('', views.FixtureList, name='all_match'),
+    path('log',views.home,name='log'),
     path('register/',views.regist,name='register'),
     # path('chat/', views.chat_view, name='chat'),
     

@@ -1,63 +1,140 @@
-<!-- League_Matches.html -->
 {% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Match Schedule</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/Team_Matches.css' %}">
+    <title>Premier League {{ start_year }}{% if start_year != end_year %}/{{ end_year }}{% endif %} Fixtures</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .match-day {
+            margin-bottom: 20px;
+        }
+        .match-day h2 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .match {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .team {
+            display: flex;
+            align-items: center;
+        }
+        .team img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .team-name {
+            font-weight: bold;
+        }
+        .time {
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Header, Nav, and other content -->
-    <!-- Search bar for team matches -->
-    <div class="search">
-        <form action="{% url 'team_matches' %}" method="GET">
-            <input type="text" name="team_name" placeholder="Search for a team...">
-            <button type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>
-            </button>
-        </form>
-    </div>
-    
-    <!-- Content2 Match Results -->
-    <div class="content2" id="result">
-        {% for round_number, round_fixtures in fixtures_by_round.items %}
-        <h1>Round {{ round_number }} MATCHES</h1>
-        {% for fixture in round_fixtures %}
-        <div class="match-card">
-            <div class="match-info">
-                <span>Match Day: {{ fixture.match_date }}</span>
-                <span>Kick-off Time: {{ fixture.kick_off_time }}</span>
-                <span>Stadium: {{ fixture.match_stadium }}</span>
-            </div>
-            <div class="teams">
-                <div class="team">
-                    <img src="{% static 'image/Logomango.png' %}" alt="azam img">
-                    <span>{{ fixture.home_team }}</span>
-                </div>
-                <div class="result">
-                    <span>VS</span>
-                </div>
-                <div class="team">
-                    <img src="{% static 'image/1127342.png' %}" alt="yanga img">
-                    <span>{{ fixture.away_team }}</span>
-                </div>
-            </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Premier League</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="{% url 'team_matches' %}" method="GET" >
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="btn btn-secondary mr-2" href="{% url 'admin:index' %}">Admin Login</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="btn btn-primary " href="{% url 'log' %}">User Login</a>
+                </li>
+            </ul>
         </div>
-        {% endfor %}
-        {% empty %}
-        <p>No fixtures available</p>
-        {% endfor %}
-    </div>
+    </nav>
 
+    <div class="container">
+        <h1>Premier League {{ start_year }}{% if start_year != end_year %}/{{ end_year }}{% endif %} Fixtures</h1>
+        
+        {% for round_number, fixtures in page_obj %}
+            <div class="match-day">
+                <h2>Matchweek {{ round_number }}</h2>
+                {% for fixture in fixtures %}
+                    <div class="match">
+                        <div class="team">
+                            <img src="{{ fixture.home_logo.url }}" alt="{{ fixture.home_team }} logo">
+                            <div class="team-name">{{ fixture.home_team }}</div>
+                        </div>
+                        <div class="time">{{ fixture.match_date|date:"D, d M Y H:i" }}<br> <span>{{ fixture.match_stadium }}</span></div>
+                        <div class="team">
+                            <div class="team-name">{{ fixture.away_team }}</div>
+                            <img src="{{ fixture.away_logo.url }}" alt="{{ fixture.away_team }} logo">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
     
-    <script src="./js/match-result.js"></script>
+        <!-- Pagination controls -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

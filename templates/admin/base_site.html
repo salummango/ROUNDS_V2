@@ -1,22 +1,7 @@
+
 {% extends "admin/base.html" %}
-{% load i18n %}
-
-{% block usertools %}
-<head>
-   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-   
-</head>
-
-    <!-- Custom Logout Form -->
-    <form action="{% url 'admin_logout' %}" method="post" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-link btn-logout">
-            <i class="fas fa-sign-out-alt"></i> {% trans 'Log out' %}
-        </button>
-    </form>
-    <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a>
-    <!-- Custom Logout Form End -->
-    <!-- Debug Message: Template Loaded -->
-    <p>Template is loaded!</p>
+{% load static %}
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'js/uploader.js' %}"></script>
 {% endblock %}

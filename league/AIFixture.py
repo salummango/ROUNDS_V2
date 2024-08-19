@@ -59,7 +59,9 @@ def generate_data_mined_fixtures(teams, rules, historical_data):
     start_date_str = rules['LeagueStartDate']
     start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
 
-    fifa_calendar = rules.get('FIFACALENDAR', [])  # Get the FIFA calendar from the rules
+    
+    fifa_calendar_str = rules.get('FIFACALENDAR', '[]')
+    fifa_calendar = json.loads(fifa_calendar_str)
 
     weekend_rule_str = rules['WeekendScheduling']
     try:
@@ -117,7 +119,7 @@ def generate_data_mined_fixtures(teams, rules, historical_data):
                 match_date = start_date + timedelta(days=rotation_index)
                 for event in fifa_calendar:
                     if event['start_date'] == '0000-00-00' and event['end_date'] == '0000-00-00':
-                        continue
+                        continue  # Skip invalid date entries
                     start_date_obj = datetime.strptime(event['start_date'], '%Y-%m-%d').date()
                     end_date_obj = datetime.strptime(event['end_date'], '%Y-%m-%d').date()
                     if start_date_obj <= match_date.date() <= end_date_obj:
@@ -157,6 +159,8 @@ def generate_data_mined_fixtures(teams, rules, historical_data):
         matches.append(round_matches)
 
     return matches, start_date
+
+
 
 # AIFixture.py
 

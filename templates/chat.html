@@ -1,32 +1,117 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Chatbot</title>
-    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
-</head>
-<body>
-    <div class="top">
-        <h1>Help Center</h1>
-        <a href={% url 'home' %}>Exit</a>
+<div id="letter" class="container mt-5 content" style="display:none;">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    {{ form.media }}
+                    <h3 class="card-title text-center mb-4">Create Letter</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_title">Title:</label>
+                            {{ form.title }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_title">Receiver:</label>
+                            {{ form.receiver }}
+                        </div>
+            
+                        <div class="textarea-container">
+                            <label for="id_body">Letter:</label>
+                            {{ form.body }}
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="chat-container">
-        {% for message in chat_messages %}
-            {% if message.sender == 'user' %}
-                <div class="user-message">
-                    <p>{{ message.content }}</p>
-                </div>
-            {% elif message.sender == 'bot' %}
-                <div class="bot-message">
-                    <p>{{ message.content }}</p>
-                </div>
+    
+    <div class="row mt-5">
+        <div class="col-md-12 mb-4">
+            <h3 class="mb-3">Received Letters</h3>
+            {% if received_letters %}
+                <ul class="list-group">
+                    {% for receiver in received_letters %}
+                        <li class="list-group-item">
+                            <a href="{% url 'letter_detail' receiver.id %}" class="btn btn-link">{{ receiver.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="alert alert-info">No Received Letters at the moment.</p>
             {% endif %}
-        {% endfor %}
+        </div>
+        
+        <div class="col-md-12 mb-4">
+            <h3 class="mb-3">Sent Letters</h3>
+            {% if sent_letters %}
+                <ul class="list-group">
+                    {% for sender in sent_letters %}
+                        <li class="list-group-item">
+                            <a href="{% url 'letter_detail' sender.id %}" class="btn btn-link">{{ sender.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="alert alert-info">No Sent Letters at the moment.</p>
+            {% endif %}
+        </div>
     </div>
-    <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="user_input" placeholder="Enter your message">
-        <button type="submit">Send</button>
-    </form>
-</body>
-</html>
+</div>
+
+
+<div id="letter" class="container mt-5 content" style="display:none;">
+    <div class="row">
+        <div class="container">
+            {{ form.media }}
+            <h1>Create Letter</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div>
+                    <label for="id_title">Title:</label>
+                    {{ form.title }}
+                </div>
+                <div>
+                    <label for="id_title">Receiver:</label>
+                    {{ form.receiver }}
+                </div>
+    
+                <div class="textarea-container">
+                    <label for="id_body">Letter:</label>
+                    {{ form.body }}
+                </div>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-12 mb-4">
+        <h1 class="mb-3">Received Letters</h1>
+        {% if received_letters %}
+            <ul class="list-group">
+                {% for receiver in received_letters %}
+                    <li class="list-group-item">
+                        <a href="{% url 'letter_detail' receiver.id %}" class="btn btn-link">{{ receiver.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="alert alert-warning">No Received Letters at the moment.</p>
+        {% endif %}
+    </div>
+    
+    <div class="col-md-12 mb-4">
+        <h1 class="mb3">Sent Letters</h1>
+        {% if sent_letters %}
+            <ul class="list-group">
+                {% for sender in sent_letters %}
+                    <li class="list-group-item">
+                        <a href="{% url 'letter_detail' sender.id %}" class="btn btn-link">{{ sender.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="alert alert-warning">No Sent Letters at the moment.</p>
+        {% endif %}
+    </div>
+</div>

@@ -14,16 +14,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login
 
 
-# class RegisterUser(APIView):
-#     parser_classes = [MultiPartParser]
 
-#     def post(self, request):
-#         serializer = UserSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-        
-#         # Redirect to the login page
-#         return redirect(reverse('login'))
 
 from rest_framework.exceptions import APIException
 from django.core.exceptions import ValidationError
@@ -42,6 +33,14 @@ class RegisterUser(APIView):
         return Response({'message': 'User registered successfully'}, status=status.HTTP_201_CREATED)
 
 from django.conf import settings
+from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.exceptions import AuthenticationFailed
+from django.contrib.auth import authenticate
+import jwt, datetime
+from django.http import JsonResponse
+
 class LoginUser(APIView):
     def post(self, request):
         email = request.data.get('email')
@@ -70,8 +69,21 @@ class LoginUser(APIView):
 
     def get(self, request):
         # Handle GET requests for login page
-        # Return the HTML template for the login page
-        return render(request, 'index.html')
+        error = request.GET.get('error')
+        error_message = None
+
+        if error == 'expired':
+            error_message = 'Your session has expired. Please log in again.'
+        elif error == 'invalid_signature':
+            error_message = 'Invalid token signature. Please log in again.'
+        elif error == 'decode_error':
+            error_message = 'There was an error decoding your session. Please log in again.'
+        elif error == 'user_not_found':
+            error_message = 'User not found. Please log in again.'
+
+        # Passing the error message to the template
+        return render(request, 'index.html', {'error_message': error_message})
+
 
 class LogoutUser(APIView):
     def post(self, request):

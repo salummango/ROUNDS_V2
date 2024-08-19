@@ -9,6 +9,11 @@
   
 </head>
 <body>
+  {% if error_message %}
+    <div class="alert alert-danger">
+        {{ error_message }}
+    </div>
+  {% endif %}
   <header>
     <h1>Welcome to NBC Premier League</h1>
   </header>

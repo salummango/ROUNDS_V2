@@ -1,57 +1,241 @@
 home_team,away_team,match_date,round_number,match_stadium
-El bicho,ihefu,2024-08-16 16:00:00+00:00,1,estadio de bicho
-talent fc,simba,2024-08-19 15:30:00+00:00,1,zone stadium
-JKU1,yanga,2024-08-20 18:00:00+00:00,1,Amani Stadium
-JKU,mango fc,2024-08-25 18:00:00+00:00,1,Amani Stadium
-El bicho,talent fc,2024-08-25 16:00:00+00:00,2,estadio de bicho
-ihefu,JKU1,2024-09-01 18:00:00+00:00,2,ihefu complex
-simba,JKU,2024-09-03 15:30:00+00:00,2,benjamin mkapa
-yanga,mango fc,2024-09-15 18:00:00+00:00,2,benjamin mkapa
-JKU1,talent fc,2024-09-17 15:30:00+00:00,3,Amani Stadium
-JKU,El bicho,2024-09-22 18:00:00+00:00,3,Amani Stadium
-mango fc,ihefu,2024-09-24 18:00:00+00:00,3,mango complex
-yanga,simba,2024-09-30 18:00:00+00:00,3,benjamin mkapa
-JKU1,JKU,2024-10-07 18:00:00+00:00,4,Amani Stadium
-talent fc,mango fc,2024-10-20 15:30:00+00:00,4,zone stadium
-El bicho,yanga,2024-10-20 16:00:00+00:00,4,estadio de bicho
-ihefu,simba,2024-10-27 18:00:00+00:00,4,ihefu complex
-mango fc,JKU,2024-10-29 18:00:00+00:00,5,mango complex
-yanga,JKU1,2024-11-03 18:00:00+00:00,5,benjamin mkapa
-simba,talent fc,2024-11-05 15:30:00+00:00,5,benjamin mkapa
-ihefu,El bicho,2024-11-10 18:00:00+00:00,5,ihefu complex
-mango fc,yanga,2024-11-12 18:00:00+00:00,6,mango complex
-JKU,simba,2024-11-24 18:00:00+00:00,6,Amani Stadium
-JKU1,ihefu,2024-11-26 18:00:00+00:00,6,Amani Stadium
-talent fc,El bicho,2024-12-01 15:30:00+00:00,6,zone stadium
-simba,yanga,2024-12-04 15:30:00+00:00,7,benjamin mkapa
-ihefu,mango fc,2024-12-08 18:00:00+00:00,7,ihefu complex
-El bicho,JKU,2024-12-08 16:00:00+00:00,7,estadio de bicho
-talent fc,JKU1,2024-12-15 15:30:00+00:00,7,zone stadium
-simba,ihefu,2024-12-17 15:30:00+00:00,8,benjamin mkapa
-yanga,El bicho,2024-12-22 18:00:00+00:00,8,benjamin mkapa
-mango fc,talent fc,2024-12-24 18:00:00+00:00,8,mango complex
-JKU,JKU1,2024-12-30 18:00:00+00:00,8,Amani Stadium
-El bicho,ihefu,2025-01-03 16:00:00+00:00,9,estadio de bicho
-talent fc,simba,2025-01-06 15:30:00+00:00,9,zone stadium
-JKU1,yanga,2025-01-07 18:00:00+00:00,9,Amani Stadium
-JKU,mango fc,2025-01-12 18:00:00+00:00,9,Amani Stadium
-El bicho,talent fc,2025-01-12 16:00:00+00:00,10,estadio de bicho
-ihefu,JKU1,2025-01-19 18:00:00+00:00,10,ihefu complex
-simba,JKU,2025-01-21 15:30:00+00:00,10,benjamin mkapa
-yanga,mango fc,2025-01-26 18:00:00+00:00,10,benjamin mkapa
-JKU1,talent fc,2025-01-28 15:30:00+00:00,11,Amani Stadium
-JKU,El bicho,2025-02-02 18:00:00+00:00,11,Amani Stadium
-mango fc,ihefu,2025-02-04 18:00:00+00:00,11,mango complex
-yanga,simba,2025-02-10 18:00:00+00:00,11,benjamin mkapa
-JKU1,JKU,2025-02-17 18:00:00+00:00,12,Amani Stadium
-talent fc,mango fc,2025-02-23 15:30:00+00:00,12,zone stadium
-El bicho,yanga,2025-02-23 16:00:00+00:00,12,estadio de bicho
-ihefu,simba,2025-03-02 18:00:00+00:00,12,ihefu complex
-mango fc,JKU,2025-03-04 18:00:00+00:00,13,mango complex
-yanga,JKU1,2025-03-09 18:00:00+00:00,13,benjamin mkapa
-simba,talent fc,2025-03-11 15:30:00+00:00,13,benjamin mkapa
-ihefu,El bicho,2025-03-16 18:00:00+00:00,13,ihefu complex
-mango fc,yanga,2025-03-18 18:00:00+00:00,14,mango complex
-JKU,simba,2025-03-30 18:00:00+00:00,14,Amani Stadium
-JKU1,ihefu,2025-04-01 18:00:00+00:00,14,Amani Stadium
-talent fc,El bicho,2025-04-06 15:30:00+00:00,14,zone stadium
+Mango fc,kagera sugar,2024-08-30 14:00:00+00:00,1,Nelson Mandela Stadium
+Geita Gold,Mlandege fc,2024-08-31 14:00:00+00:00,1,CCM Kirumba
+Pamba fc,Azam,2024-08-31 14:00:00+00:00,1,Pamba Stadium
+Dododma Jiji,JKU,2024-08-31 14:00:00+00:00,1,Uhuru Stadium
+Singida Big Stars,JKT Tanzania,2024-08-31 15:30:00+00:00,1,Liti Stadium
+Yanga,KMC,2024-09-03 14:00:00+00:00,1,Benjamin Mkapa Stadium
+Simba,Mtibwa Sugar,2024-09-04 18:00:00+00:00,1,Benjamin Mkapa Stadium
+mashujaa,Namungo,2024-09-04 18:00:00+00:00,1,Lake Tnganyika Stadium
+Mango fc,Geita Gold,2024-09-13 14:00:00+00:00,2,Nelson Mandela Stadium
+kagera sugar,Pamba fc,2024-09-14 15:30:00+00:00,2,kagera complex
+Mlandege fc,Dododma Jiji,2024-09-14 15:30:00+00:00,2,New Amani Complex
+Azam,Singida Big Stars,2024-09-16 18:00:00+00:00,2,Azam Comple
+JKU,Yanga,2024-09-16 15:30:00+00:00,2,New Amani Complex
+JKT Tanzania,Simba,2024-09-22 15:30:00+00:00,2,General Isamuyo Stadium
+KMC,mashujaa,2024-09-24 18:00:00+00:00,2,KMC complex
+Mtibwa Sugar,Namungo,2024-09-24 18:00:00+00:00,2,Manungu complex
+Pamba fc,Geita Gold,2024-09-27 15:30:00+00:00,3,Pamba Stadium
+Dododma Jiji,Mango fc,2024-09-28 18:00:00+00:00,3,Uhuru Stadium
+Singida Big Stars,kagera sugar,2024-09-28 15:30:00+00:00,3,Liti Stadium
+Yanga,Mlandege fc,2024-09-30 15:30:00+00:00,3,Benjamin Mkapa Stadium
+Simba,Azam,2024-10-01 15:30:00+00:00,3,Benjamin Mkapa Stadium
+mashujaa,JKU,2024-10-04 14:00:00+00:00,3,Lake Tnganyika Stadium
+Namungo,JKT Tanzania,2024-10-05 18:00:00+00:00,3,Majaliwa Stadium
+Mtibwa Sugar,KMC,2024-10-05 18:00:00+00:00,3,Manungu complex
+Pamba fc,Dododma Jiji,2024-10-06 15:30:00+00:00,4,Pamba Stadium
+Geita Gold,Singida Big Stars,2024-10-06 15:30:00+00:00,4,CCM Kirumba
+Mango fc,Yanga,2024-10-06 18:00:00+00:00,4,Nelson Mandela Stadium
+kagera sugar,Simba,2024-10-18 18:00:00+00:00,4,kagera complex
+Mlandege fc,mashujaa,2024-10-19 14:00:00+00:00,4,New Amani Complex
+Azam,Namungo,2024-10-21 14:00:00+00:00,4,Azam Comple
+JKU,Mtibwa Sugar,2024-10-21 15:30:00+00:00,4,New Amani Complex
+JKT Tanzania,KMC,2024-10-22 14:00:00+00:00,4,General Isamuyo Stadium
+Singida Big Stars,Dododma Jiji,2024-10-25 15:30:00+00:00,5,Liti Stadium
+Yanga,Pamba fc,2024-10-28 15:30:00+00:00,5,Benjamin Mkapa Stadium
+Simba,Geita Gold,2024-10-29 18:00:00+00:00,5,Benjamin Mkapa Stadium
+mashujaa,Mango fc,2024-10-29 18:00:00+00:00,5,Lake Tnganyika Stadium
+Namungo,kagera sugar,2024-10-29 14:00:00+00:00,5,Majaliwa Stadium
+Mtibwa Sugar,Mlandege fc,2024-11-01 18:00:00+00:00,5,Manungu complex
+KMC,Azam,2024-11-04 15:30:00+00:00,5,KMC complex
+JKT Tanzania,JKU,2024-11-05 18:00:00+00:00,5,General Isamuyo Stadium
+Singida Big Stars,Yanga,2024-11-08 14:00:00+00:00,6,Liti Stadium
+Dododma Jiji,Simba,2024-11-09 14:00:00+00:00,6,Uhuru Stadium
+Pamba fc,mashujaa,2024-11-09 15:30:00+00:00,6,Pamba Stadium
+Geita Gold,Namungo,2024-11-09 14:00:00+00:00,6,CCM Kirumba
+Mango fc,Mtibwa Sugar,2024-11-09 14:00:00+00:00,6,Nelson Mandela Stadium
+kagera sugar,KMC,2024-11-10 18:00:00+00:00,6,kagera complex
+Mlandege fc,JKT Tanzania,2024-11-10 15:30:00+00:00,6,New Amani Complex
+Azam,JKU,2024-11-12 15:30:00+00:00,6,Azam Comple
+Simba,Yanga,2024-11-25 15:30:00+00:00,7,Benjamin Mkapa Stadium
+mashujaa,Singida Big Stars,2024-11-29 15:30:00+00:00,7,Lake Tnganyika Stadium
+Namungo,Dododma Jiji,2024-11-30 15:30:00+00:00,7,Majaliwa Stadium
+Mtibwa Sugar,Pamba fc,2024-11-30 14:00:00+00:00,7,Manungu complex
+KMC,Geita Gold,2024-12-02 18:00:00+00:00,7,KMC complex
+JKT Tanzania,Mango fc,2024-12-03 18:00:00+00:00,7,General Isamuyo Stadium
+JKU,kagera sugar,2024-12-06 14:00:00+00:00,7,New Amani Complex
+Azam,Mlandege fc,2024-12-09 14:00:00+00:00,7,Azam Comple
+Simba,mashujaa,2024-12-15 14:00:00+00:00,8,Benjamin Mkapa Stadium
+Yanga,Namungo,2024-12-17 14:00:00+00:00,8,Benjamin Mkapa Stadium
+Singida Big Stars,Mtibwa Sugar,2024-12-17 18:00:00+00:00,8,Liti Stadium
+Dododma Jiji,KMC,2024-12-17 14:00:00+00:00,8,Uhuru Stadium
+Pamba fc,JKT Tanzania,2024-12-20 14:00:00+00:00,8,Pamba Stadium
+Geita Gold,JKU,2024-12-21 18:00:00+00:00,8,CCM Kirumba
+Mango fc,Azam,2024-12-21 15:30:00+00:00,8,Nelson Mandela Stadium
+kagera sugar,Mlandege fc,2024-12-21 14:00:00+00:00,8,kagera complex
+Namungo,mashujaa,2024-12-22 15:30:00+00:00,9,Majaliwa Stadium
+Mtibwa Sugar,Simba,2024-12-22 18:00:00+00:00,9,Manungu complex
+KMC,Yanga,2024-12-24 18:00:00+00:00,9,KMC complex
+JKT Tanzania,Singida Big Stars,2024-12-29 15:30:00+00:00,9,General Isamuyo Stadium
+JKU,Dododma Jiji,2024-12-29 18:00:00+00:00,9,New Amani Complex
+Azam,Pamba fc,2024-12-31 18:00:00+00:00,9,Azam Comple
+Mlandege fc,Geita Gold,2024-12-31 14:00:00+00:00,9,New Amani Complex
+kagera sugar,Mango fc,2025-01-03 18:00:00+00:00,9,kagera complex
+Namungo,Mtibwa Sugar,2025-01-04 14:00:00+00:00,10,Majaliwa Stadium
+mashujaa,KMC,2025-01-04 18:00:00+00:00,10,Lake Tnganyika Stadium
+Simba,JKT Tanzania,2025-01-06 18:00:00+00:00,10,Benjamin Mkapa Stadium
+Yanga,JKU,2025-01-07 18:00:00+00:00,10,Benjamin Mkapa Stadium
+Singida Big Stars,Azam,2025-01-10 14:00:00+00:00,10,Liti Stadium
+Dododma Jiji,Mlandege fc,2025-01-11 18:00:00+00:00,10,Uhuru Stadium
+Pamba fc,kagera sugar,2025-01-11 15:30:00+00:00,10,Pamba Stadium
+Geita Gold,Mango fc,2025-01-11 14:00:00+00:00,10,CCM Kirumba
+KMC,Mtibwa Sugar,2025-01-14 14:00:00+00:00,11,KMC complex
+JKT Tanzania,Namungo,2025-01-15 18:00:00+00:00,11,General Isamuyo Stadium
+JKU,mashujaa,2025-01-15 14:00:00+00:00,11,New Amani Complex
+Azam,Simba,2025-01-19 15:30:00+00:00,11,Azam Comple
+Mlandege fc,Yanga,2025-01-19 14:00:00+00:00,11,New Amani Complex
+kagera sugar,Singida Big Stars,2025-01-19 15:30:00+00:00,11,kagera complex
+Mango fc,Dododma Jiji,2025-01-19 18:00:00+00:00,11,Nelson Mandela Stadium
+Geita Gold,Pamba fc,2025-01-24 14:00:00+00:00,11,CCM Kirumba
+KMC,JKT Tanzania,2025-01-27 18:00:00+00:00,12,KMC complex
+Mtibwa Sugar,JKU,2025-01-27 18:00:00+00:00,12,Manungu complex
+Namungo,Azam,2025-01-27 15:30:00+00:00,12,Majaliwa Stadium
+mashujaa,Mlandege fc,2025-01-27 18:00:00+00:00,12,Lake Tnganyika Stadium
+Simba,kagera sugar,2025-02-02 14:00:00+00:00,12,Benjamin Mkapa Stadium
+Yanga,Mango fc,2025-02-04 15:30:00+00:00,12,Benjamin Mkapa Stadium
+Singida Big Stars,Geita Gold,2025-02-04 15:30:00+00:00,12,Liti Stadium
+Dododma Jiji,Pamba fc,2025-02-04 15:30:00+00:00,12,Uhuru Stadium
+JKU,JKT Tanzania,2025-02-07 18:00:00+00:00,13,New Amani Complex
+Azam,KMC,2025-02-10 14:00:00+00:00,13,Azam Comple
+Mlandege fc,Mtibwa Sugar,2025-02-10 15:30:00+00:00,13,New Amani Complex
+kagera sugar,Namungo,2025-02-10 15:30:00+00:00,13,kagera complex
+Mango fc,mashujaa,2025-02-10 18:00:00+00:00,13,Nelson Mandela Stadium
+Geita Gold,Simba,2025-02-14 14:00:00+00:00,13,CCM Kirumba
+Pamba fc,Yanga,2025-02-15 18:00:00+00:00,13,Pamba Stadium
+Dododma Jiji,Singida Big Stars,2025-02-15 15:30:00+00:00,13,Uhuru Stadium
+JKU,Azam,2025-02-16 18:00:00+00:00,14,New Amani Complex
+JKT Tanzania,Mlandege fc,2025-02-18 14:00:00+00:00,14,General Isamuyo Stadium
+KMC,kagera sugar,2025-02-19 18:00:00+00:00,14,KMC complex
+Mtibwa Sugar,Mango fc,2025-02-21 14:00:00+00:00,14,Manungu complex
+Namungo,Geita Gold,2025-02-22 14:00:00+00:00,14,Majaliwa Stadium
+mashujaa,Pamba fc,2025-02-22 15:30:00+00:00,14,Lake Tnganyika Stadium
+Simba,Dododma Jiji,2025-02-24 15:30:00+00:00,14,Benjamin Mkapa Stadium
+Yanga,Singida Big Stars,2025-02-25 18:00:00+00:00,14,Benjamin Mkapa Stadium
+Mlandege fc,Azam,2025-02-28 15:30:00+00:00,15,New Amani Complex
+kagera sugar,JKU,2025-03-01 15:30:00+00:00,15,kagera complex
+Mango fc,JKT Tanzania,2025-03-01 18:00:00+00:00,15,Nelson Mandela Stadium
+Geita Gold,KMC,2025-03-01 14:00:00+00:00,15,CCM Kirumba
+Pamba fc,Mtibwa Sugar,2025-03-01 18:00:00+00:00,15,Pamba Stadium
+Dododma Jiji,Namungo,2025-03-02 15:30:00+00:00,15,Uhuru Stadium
+Singida Big Stars,mashujaa,2025-03-02 15:30:00+00:00,15,Liti Stadium
+Yanga,Simba,2025-03-05 14:00:00+00:00,15,Benjamin Mkapa Stadium
+Mlandege fc,kagera sugar,2025-03-07 18:00:00+00:00,16,New Amani Complex
+Azam,Mango fc,2025-03-10 15:30:00+00:00,16,Azam Comple
+JKU,Geita Gold,2025-03-10 15:30:00+00:00,16,New Amani Complex
+JKT Tanzania,Pamba fc,2025-03-11 15:30:00+00:00,16,General Isamuyo Stadium
+KMC,Dododma Jiji,2025-03-12 18:00:00+00:00,16,KMC complex
+Mtibwa Sugar,Singida Big Stars,2025-03-14 18:00:00+00:00,16,Manungu complex
+Namungo,Yanga,2025-03-15 18:00:00+00:00,16,Majaliwa Stadium
+mashujaa,Simba,2025-03-15 18:00:00+00:00,16,Lake Tnganyika Stadium
+Mango fc,kagera sugar,2025-03-16 14:00:00+00:00,17,Nelson Mandela Stadium
+Geita Gold,Mlandege fc,2025-03-16 15:30:00+00:00,17,CCM Kirumba
+Pamba fc,Azam,2025-03-16 14:00:00+00:00,17,Pamba Stadium
+Dododma Jiji,JKU,2025-03-28 15:30:00+00:00,17,Uhuru Stadium
+Singida Big Stars,JKT Tanzania,2025-03-29 18:00:00+00:00,17,Liti Stadium
+Yanga,KMC,2025-03-31 18:00:00+00:00,17,Benjamin Mkapa Stadium
+Simba,Mtibwa Sugar,2025-04-01 18:00:00+00:00,17,Benjamin Mkapa Stadium
+mashujaa,Namungo,2025-04-01 18:00:00+00:00,17,Lake Tnganyika Stadium
+Mango fc,Geita Gold,2025-04-04 18:00:00+00:00,18,Nelson Mandela Stadium
+kagera sugar,Pamba fc,2025-04-05 18:00:00+00:00,18,kagera complex
+Mlandege fc,Dododma Jiji,2025-04-05 14:00:00+00:00,18,New Amani Complex
+Azam,Singida Big Stars,2025-04-07 15:30:00+00:00,18,Azam Comple
+JKU,Yanga,2025-04-07 18:00:00+00:00,18,New Amani Complex
+JKT Tanzania,Simba,2025-04-13 15:30:00+00:00,18,General Isamuyo Stadium
+KMC,mashujaa,2025-04-15 15:30:00+00:00,18,KMC complex
+Mtibwa Sugar,Namungo,2025-04-15 18:00:00+00:00,18,Manungu complex
+Pamba fc,Geita Gold,2025-04-18 18:00:00+00:00,19,Pamba Stadium
+Dododma Jiji,Mango fc,2025-04-19 18:00:00+00:00,19,Uhuru Stadium
+Singida Big Stars,kagera sugar,2025-04-19 14:00:00+00:00,19,Liti Stadium
+Yanga,Mlandege fc,2025-04-21 14:00:00+00:00,19,Benjamin Mkapa Stadium
+Simba,Azam,2025-04-22 14:00:00+00:00,19,Benjamin Mkapa Stadium
+mashujaa,JKU,2025-04-25 15:30:00+00:00,19,Lake Tnganyika Stadium
+Namungo,JKT Tanzania,2025-04-26 18:00:00+00:00,19,Majaliwa Stadium
+Mtibwa Sugar,KMC,2025-04-26 18:00:00+00:00,19,Manungu complex
+Pamba fc,Dododma Jiji,2025-04-27 18:00:00+00:00,20,Pamba Stadium
+Geita Gold,Singida Big Stars,2025-04-27 14:00:00+00:00,20,CCM Kirumba
+Mango fc,Yanga,2025-04-27 15:30:00+00:00,20,Nelson Mandela Stadium
+kagera sugar,Simba,2025-05-02 14:00:00+00:00,20,kagera complex
+Mlandege fc,mashujaa,2025-05-03 18:00:00+00:00,20,New Amani Complex
+Azam,Namungo,2025-05-05 18:00:00+00:00,20,Azam Comple
+JKU,Mtibwa Sugar,2025-05-05 18:00:00+00:00,20,New Amani Complex
+JKT Tanzania,KMC,2025-05-06 15:30:00+00:00,20,General Isamuyo Stadium
+Singida Big Stars,Dododma Jiji,2025-05-09 18:00:00+00:00,21,Liti Stadium
+Yanga,Pamba fc,2025-05-12 18:00:00+00:00,21,Benjamin Mkapa Stadium
+Simba,Geita Gold,2025-05-13 18:00:00+00:00,21,Benjamin Mkapa Stadium
+mashujaa,Mango fc,2025-05-13 18:00:00+00:00,21,Lake Tnganyika Stadium
+Namungo,kagera sugar,2025-05-13 15:30:00+00:00,21,Majaliwa Stadium
+Mtibwa Sugar,Mlandege fc,2025-05-16 14:00:00+00:00,21,Manungu complex
+KMC,Azam,2025-05-19 15:30:00+00:00,21,KMC complex
+JKT Tanzania,JKU,2025-05-20 18:00:00+00:00,21,General Isamuyo Stadium
+Singida Big Stars,Yanga,2025-05-23 15:30:00+00:00,22,Liti Stadium
+Dododma Jiji,Simba,2025-05-24 14:00:00+00:00,22,Uhuru Stadium
+Pamba fc,mashujaa,2025-05-24 15:30:00+00:00,22,Pamba Stadium
+Geita Gold,Namungo,2025-05-24 15:30:00+00:00,22,CCM Kirumba
+Mango fc,Mtibwa Sugar,2025-05-24 15:30:00+00:00,22,Nelson Mandela Stadium
+kagera sugar,KMC,2025-05-25 18:00:00+00:00,22,kagera complex
+Mlandege fc,JKT Tanzania,2025-05-25 15:30:00+00:00,22,New Amani Complex
+Azam,JKU,2025-05-27 18:00:00+00:00,22,Azam Comple
+Simba,Yanga,2025-06-02 18:00:00+00:00,23,Benjamin Mkapa Stadium
+mashujaa,Singida Big Stars,2025-06-06 15:30:00+00:00,23,Lake Tnganyika Stadium
+Namungo,Dododma Jiji,2025-06-07 18:00:00+00:00,23,Majaliwa Stadium
+Mtibwa Sugar,Pamba fc,2025-06-07 18:00:00+00:00,23,Manungu complex
+KMC,Geita Gold,2025-06-09 14:00:00+00:00,23,KMC complex
+JKT Tanzania,Mango fc,2025-06-10 15:30:00+00:00,23,General Isamuyo Stadium
+JKU,kagera sugar,2025-06-13 18:00:00+00:00,23,New Amani Complex
+Azam,Mlandege fc,2025-06-16 18:00:00+00:00,23,Azam Comple
+Simba,mashujaa,2025-06-22 18:00:00+00:00,24,Benjamin Mkapa Stadium
+Yanga,Namungo,2025-06-24 18:00:00+00:00,24,Benjamin Mkapa Stadium
+Singida Big Stars,Mtibwa Sugar,2025-06-24 15:30:00+00:00,24,Liti Stadium
+Dododma Jiji,KMC,2025-06-24 15:30:00+00:00,24,Uhuru Stadium
+Pamba fc,JKT Tanzania,2025-06-27 15:30:00+00:00,24,Pamba Stadium
+Geita Gold,JKU,2025-06-28 15:30:00+00:00,24,CCM Kirumba
+Mango fc,Azam,2025-06-28 14:00:00+00:00,24,Nelson Mandela Stadium
+kagera sugar,Mlandege fc,2025-06-28 14:00:00+00:00,24,kagera complex
+Namungo,mashujaa,2025-06-29 18:00:00+00:00,25,Majaliwa Stadium
+Mtibwa Sugar,Simba,2025-06-29 14:00:00+00:00,25,Manungu complex
+KMC,Yanga,2025-07-01 15:30:00+00:00,25,KMC complex
+JKT Tanzania,Singida Big Stars,2025-07-06 15:30:00+00:00,25,General Isamuyo Stadium
+JKU,Dododma Jiji,2025-07-06 18:00:00+00:00,25,New Amani Complex
+Azam,Pamba fc,2025-07-08 15:30:00+00:00,25,Azam Comple
+Mlandege fc,Geita Gold,2025-07-08 14:00:00+00:00,25,New Amani Complex
+kagera sugar,Mango fc,2025-07-11 14:00:00+00:00,25,kagera complex
+Namungo,Mtibwa Sugar,2025-07-12 14:00:00+00:00,26,Majaliwa Stadium
+mashujaa,KMC,2025-07-12 15:30:00+00:00,26,Lake Tnganyika Stadium
+Simba,JKT Tanzania,2025-07-14 15:30:00+00:00,26,Benjamin Mkapa Stadium
+Yanga,JKU,2025-07-15 14:00:00+00:00,26,Benjamin Mkapa Stadium
+Singida Big Stars,Azam,2025-07-18 14:00:00+00:00,26,Liti Stadium
+Dododma Jiji,Mlandege fc,2025-07-19 18:00:00+00:00,26,Uhuru Stadium
+Pamba fc,kagera sugar,2025-07-19 18:00:00+00:00,26,Pamba Stadium
+Geita Gold,Mango fc,2025-07-19 14:00:00+00:00,26,CCM Kirumba
+KMC,Mtibwa Sugar,2025-07-22 14:00:00+00:00,27,KMC complex
+JKT Tanzania,Namungo,2025-07-23 18:00:00+00:00,27,General Isamuyo Stadium
+JKU,mashujaa,2025-07-23 18:00:00+00:00,27,New Amani Complex
+Azam,Simba,2025-07-27 18:00:00+00:00,27,Azam Comple
+Mlandege fc,Yanga,2025-07-27 18:00:00+00:00,27,New Amani Complex
+kagera sugar,Singida Big Stars,2025-07-27 14:00:00+00:00,27,kagera complex
+Mango fc,Dododma Jiji,2025-07-27 18:00:00+00:00,27,Nelson Mandela Stadium
+Geita Gold,Pamba fc,2025-08-01 15:30:00+00:00,27,CCM Kirumba
+KMC,JKT Tanzania,2025-08-04 15:30:00+00:00,28,KMC complex
+Mtibwa Sugar,JKU,2025-08-04 14:00:00+00:00,28,Manungu complex
+Namungo,Azam,2025-08-04 18:00:00+00:00,28,Majaliwa Stadium
+mashujaa,Mlandege fc,2025-08-04 14:00:00+00:00,28,Lake Tnganyika Stadium
+Simba,kagera sugar,2025-08-10 14:00:00+00:00,28,Benjamin Mkapa Stadium
+Yanga,Mango fc,2025-08-12 18:00:00+00:00,28,Benjamin Mkapa Stadium
+Singida Big Stars,Geita Gold,2025-08-12 15:30:00+00:00,28,Liti Stadium
+Dododma Jiji,Pamba fc,2025-08-12 15:30:00+00:00,28,Uhuru Stadium
+JKU,JKT Tanzania,2025-08-15 15:30:00+00:00,29,New Amani Complex
+Azam,KMC,2025-08-18 15:30:00+00:00,29,Azam Comple
+Mlandege fc,Mtibwa Sugar,2025-08-18 18:00:00+00:00,29,New Amani Complex
+kagera sugar,Namungo,2025-08-18 15:30:00+00:00,29,kagera complex
+Mango fc,mashujaa,2025-08-18 18:00:00+00:00,29,Nelson Mandela Stadium
+Geita Gold,Simba,2025-08-22 15:30:00+00:00,29,CCM Kirumba
+Pamba fc,Yanga,2025-08-23 15:30:00+00:00,29,Pamba Stadium
+Dododma Jiji,Singida Big Stars,2025-08-23 15:30:00+00:00,29,Uhuru Stadium
+JKU,Azam,2025-08-24 14:00:00+00:00,30,New Amani Complex
+JKT Tanzania,Mlandege fc,2025-08-26 18:00:00+00:00,30,General Isamuyo Stadium
+KMC,kagera sugar,2025-08-27 15:30:00+00:00,30,KMC complex
+Mtibwa Sugar,Mango fc,2025-08-29 18:00:00+00:00,30,Manungu complex
+Namungo,Geita Gold,2025-08-30 15:30:00+00:00,30,Majaliwa Stadium
+mashujaa,Pamba fc,2025-08-30 18:00:00+00:00,30,Lake Tnganyika Stadium
+Simba,Dododma Jiji,2025-09-01 14:00:00+00:00,30,Benjamin Mkapa Stadium
+Yanga,Singida Big Stars,2025-09-02 15:30:00+00:00,30,Benjamin Mkapa Stadium

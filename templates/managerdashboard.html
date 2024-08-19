@@ -11,6 +11,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/chat.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/boostrap.min.css' %}">
+    <style>
+        .team-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
+
+       
+    </style>
 
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
@@ -20,7 +29,7 @@
 <body>
     <div class="sidebar">
         <div class="logo-details">
-            <i class="bx bxl-c-plus-plus"></i>
+            {% comment %} <img src="{% static 'image/NBC.jpg' %}"> {% endcomment %}
             <span class="logo_name">NBC Premear League</span>
         </div>
         <ul class="nav-links">
@@ -36,13 +45,18 @@
             </button>
 
             <button class="sidebar-button" data-section-id="teams">
-                <i class="bx bx-shirt"></i>
+                <i class="bx bx-stadium"></i>
                 <span>ALL TEAM</span>
             </button>
 
             <button class="sidebar-button" data-section-id="statistic">
                 <i class="bx bx-chart"></i>
                 <span>STATISTICS</span>
+            </button>
+
+            <button class="sidebar-button" data-section-id="letter">
+                <i class="bx bx-note"></i>
+                <span>LETTERS</span>
             </button>
 
             <button id="logout-button" class="log_out">
@@ -84,9 +98,9 @@
         </nav>
 
         <div class="home-content">
-            <div class="container content mt-5" id="home">
+            <div class="container content " id="home">
                 <h1>Football Match Calendar - {{ year }} - {{ month }}</h1>
-                <form method="get" class="d-flex align-items-center mb-3">
+                <form method="get" class="d-flex flex-row mb-3">
                     <div class="form-group mr-2">
                         <label for="month" class="mr-2">Select Month:</label>
                         <select id="month" name="month" class="form-control">
@@ -156,113 +170,260 @@
                 <div id="fixture-sections">
 
                     <!-- All Fixtures -->
-                    
-                    <table id="all-team-fixtures" class="fixture-section">
-                        <thead>
-                            <tr>
-                                <th>Home Team</th>
-                                <th>Away Team</th>
-                                <th>Match Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for fixture in all_fixtures %}
-                            <tr>
-                                <td>{{ fixture.home_team }}</td>
-                                <td>{{ fixture.away_team }}</td>
-                                <td>{{ fixture.match_date }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-
+                    <div id="all-team-fixtures" class="fixture-section">
+                        <h2 class="mb-4">All Fixtures</h2>
+                        <table class="table table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Home Team</th>
+                                    <th scope="col">Away Team</th>
+                                    <th scope="col">Match Stadium</th>
+                                    <th scope="col">Match Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for fixture in all_fixtures %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ fixture.home_logo.url }}" alt="{{ fixture.home_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                            <span class="ml-5">{{ fixture.home_team }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span>{{ fixture.away_team }}</span>
+                                            <img class="ml-5" src="{{ fixture.away_logo.url }}" alt="{{ fixture.away_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                        </div>
+                                    </td>
+                                    <td>{{ fixture.match_stadium }}</td>
+                                    <td>{{ fixture.match_date|date:"D d M Y H:i" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
 
                     <!-- Your Team's Fixtures -->
                     <div id="user-team-fixtures " class="fixture-section hidden">
                         <h2 class="mb-4">Your Team's Fixtures</h2>
-                        <ul class="list-group">
-                            {% for fixture in user_team_fixtures %}
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ fixture.home_logo.url }}" alt="{{ fixture.home_team }}" class="team-logo me-2">
-                                    <span>{{ fixture.home_team }}</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span>{{ fixture.away_team }}</span>
-                                    <img src="{{ fixture.away_logo.url }}" alt="{{ fixture.away_team }}" class="team-logo ms-2">
-                                </div>
-                                <span class="badge bg-primary">{{ fixture.match_date|date:"D d M Y H:i" }}</span>
-                            </li>
-                            {% endfor %}
-                        </ul>
+                        <table class="table table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Home Team</th>
+                                    <th scope="col">Away Team</th>
+                                    <th scope="col">Match Stadium</th>
+                                    <th scope="col">Match Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for fixture in user_team_fixtures %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center pb-5">
+                                            <img src="{{ fixture.home_logo.url }}" alt="{{ fixture.home_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                            <span>{{ fixture.home_team }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span>{{ fixture.away_team }}</span>
+                                            <img src="{{ fixture.away_logo.url }}" alt="{{ fixture.away_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                        </div>
+                                    </td>
+                                    <td>{{ fixture.match_stadium }}</td>
+                                    <td>{{ fixture.match_date|date:"D d M Y H:i" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
 
                     <!-- Played Fixtures -->
                     <div id="played-fixtures " class="fixture-section hidden ">
                         <h2>Played Fixtures</h2>
-                        <ul>
-                            {% for fixture in played_fixtures %}
-                            <li class="fixture-item ">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
-                            {% endfor %}
-                        </ul>
+                        
+                        {% if played_fixtures %}
+                        <table class="table table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Home Team</th>
+                                    <th scope="col">Away Team</th>
+                                    <th scope="col">Match Stadium</th>
+                                    <th scope="col">Match Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for fixture in played_fixtures %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center pb-5">
+                                            <img src="{{ fixture.home_logo.url }}" alt="{{ fixture.home_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                            <span>{{ fixture.home_team }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span>{{ fixture.away_team }}</span>
+                                            <img src="{{ fixture.away_logo.url }}" alt="{{ fixture.away_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                        </div>
+                                    </td>
+                                    <td>{{ fixture.match_stadium }}</td>
+                                    <td>{{ fixture.match_date|date:"D d M Y H:i" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        {% else %}
+                            <p class="alert alert-info">No played fixtures available.</p>
+                        {% endif %}
                     </div>
 
                     <!-- Non-Played Fixtures -->
                     <div id="non-played-fixtures " class="fixture-section hidden ">
                         <h2>Non-Played Fixtures</h2>
-                        <ul>
-                            {% for fixture in non_played_fixtures %}
-                            <li class="fixture-item ">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
-                            {% endfor %}
-                        </ul>
+                        {% if non_played_fixtures %}
+                        <table class="table table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Home Team</th>
+                                    <th scope="col">Away Team</th>
+                                    <th scope="col">Match Stadium</th>
+                                    <th scope="col">Match Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for fixture in non_played_fixtures %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center pb-5">
+                                            <img src="{{ fixture.home_logo.url }}" alt="{{ fixture.home_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                            <span>{{ fixture.home_team }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span>{{ fixture.away_team }}</span>
+                                            <img src="{{ fixture.away_logo.url }}" alt="{{ fixture.away_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                        </div>
+                                    </td>
+                                    <td>{{ fixture.match_stadium }}</td>
+                                    <td>{{ fixture.match_date|date:"D d M Y H:i" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        {% else %}
+                            <p class="alert alert-info">No non-played fixtures available.</p>
+                        {% endif %}
                     </div>
 
                     <!-- Next 5 Matches -->
-                    <div id="next-matches " class="fixture-section hidden ">
+                    <div id="next-matches" class="fixture-section hidden">
                         <h2>Next 5 Matches</h2>
-                        <ul>
-                            {% for fixture in next_matches %}
-                            <li class="fixture-item ">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
-                            {% endfor %}
-                        </ul>
+                        <table class="table table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Home Team</th>
+                                    <th scope="col">Away Team</th>
+                                    <th scope="col">Match Stadium</th>
+                                    <th scope="col">Match Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for fixture in next_matches %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center ">
+                                            <img src="{{ fixture.home_logo.url }}" alt="{{ fixture.home_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                            <span>{{ fixture.home_team }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span>{{ fixture.away_team }}</span>
+                                            <img src="{{ fixture.away_logo.url }}" alt="{{ fixture.away_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                        </div>
+                                    </td>
+                                    <td>{{ fixture.match_stadium }}</td>
+                                    <td>{{ fixture.match_date|date:"D d M Y H:i" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
                     </div>
 
                     <!-- Previous 5 Matches -->
-                    <div id="previous-matches " class="fixture-section hidden ">
+                    <div id="previous-matches" class="fixture-section hidden">
                         <h2>Previous 5 Matches</h2>
-                        <ul>
-                            {% for fixture in previous_matches %}
-                            <li class="fixture-item ">{{ fixture.home_team }} vs {{ fixture.away_team }} - {{ fixture.match_date }}</li>
-                            {% endfor %}
-                        </ul>
+                        
+                        {% if previous_matches %}
+                        <table class="table table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Home Team</th>
+                                    <th scope="col">Away Team</th>
+                                    <th scope="col">Match Stadium</th>
+                                    <th scope="col">Match Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for fixture in previous_fixtures %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center pb-5">
+                                            <img src="{{ fixture.home_logo.url }}" alt="{{ fixture.home_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                            <span>{{ fixture.home_team }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span>{{ fixture.away_team }}</span>
+                                            <img src="{{ fixture.away_logo.url }}" alt="{{ fixture.away_team }}" style="width:50px;height:50px;border-radius:50%;">
+                                        </div>
+                                    </td>
+                                    <td>{{ fixture.match_stadium }}</td>
+                                    <td>{{ fixture.match_date|date:"D d M Y H:i" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        {% else %}
+                            <p class="alert alert-info">No played fixtures available.</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
 
 
             <div id="teams" class="content" style="display:none;">
-                <h1>All Team List  (Total: {{ total_teams }})</h1>
-                <table class="custom-table">
-                    <thead>
-                        <tr>
-                            <th>Team Logo</th>
-                            <th>Team Name</th>
-                            <th>Team Stadium</th>
-                            <th>Team City</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for team in teams %}
-                        <tr>
-                            <td><img src="{{ team.TeamLogo.url }}" alt="Team Logo"></td>
-                            <td>{{ team.TeamName }}</td>
-                            <td>{{ team.TeamStadium }}</td>
-                            <td>{{ team.TeamCity }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                
+                <div class="container">
+                    <h1 class="mb-4">Teams</h1>
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Team Logo</th>
+                                <th scope="col">Team Name</th>
+                                <th scope="col">Team Stadium</th>
+                                <th scope="col">Team City</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for team in teams %}
+                            <tr>
+                                <td><img src="{{ team.TeamLogo.url }}" alt="Team Logo" class="team-logo img-thumbnail"></td>
+                                <td>{{ team.TeamName }}</td>
+                                <td>{{ team.TeamStadium }}</td>
+                                <td>{{ team.TeamCity }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- USER PROFILE SECTION  -->
@@ -339,34 +500,74 @@
                 <!-- Chart to display cities with the quantity of teams -->
                 <div>
                     <img src="{{ MEDIA_URL }}charts/teams_by_city_plot.png" alt="Teams by City" width="800">
-                    <img src="{{ MEDIA_URL }}charts/teams_by_city_pie_chart.png" alt="Teams by City" width="800">
+                    
                 </div>
+            </div>
 
-                <div>
-                    <h2>Teams with First and Last Matches at Home:</h2>
-                    <ul>
-                        {% for team in first_and_last_home_teams %}
-                            <li>{{ team }}</li>
-                        {% endfor %}
-                    </ul>
-
-                    <h2>Teams with First and Last Matches Away:</h2>
-                    <ul>
-                        {% for team in first_and_last_away_teams %}
-                            <li>{{ team }}</li>
-                        {% endfor %}
-                    </ul>
-
-                    <h2>Teams with First and Last Matches Either Home or Away:</h2>
-                    <ul>
-                        {% for team in first_and_last_either_teams %}
-                            <li>{{ team }}</li>
-                        {% endfor %}
-                    </ul>
-
+            <div id="letter" class="container content" style="display:none;">
+                <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="card">
+                            <div class="card-body">
+                                {{ form.media }}
+                                <h3 class="card-title text-center mb-4">Create Letter</h3>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="id_title">Title:</label>
+                                        {{ form.title }}
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="id_title">Receiver:</label>
+                                        {{ form.receiver }}
+                                    </div>
+                        
+                                    <div class="textarea-container">
+                                        <label for="id_body">Letter:</label>
+                                        {{ form.body }}
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Send</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-
+                
+                <div class="row mt-5">
+                    <div class="col-md-12 mb-4">
+                        <h3 class="mb-3">Received Letters</h3>
+                        {% if received_letters %}
+                            <ul class="list-group">
+                                {% for receiver in received_letters %}
+                                    <li class="list-group-item">
+                                        <a href="{% url 'letter_detail' receiver.id %}" class="btn btn-link">{{ receiver.title }}</a>
+                                        <br>
+                                        <small>From: {{ receiver.sender.email }} | Received on: {{ receiver.created|date:"F j, Y, g:i a" }}</small>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="alert alert-info">No Received Letters at the moment.</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="col-md-12 mb-4">
+                        <h3 class="mb-3">Sent Letters</h3>
+                        {% if sent_letters %}
+                            <ul class="list-group">
+                                {% for letter in sent_letters %}
+                                    <li class="list-group-item">
+                                        <a href="{% url 'letter_detail' letter.id %}" class="btn btn-link">{{ letter.title }}</a>
+                                        <br>
+                                        <small>To: {{ letter.receiver.email }} | Sent on: {{ letter.created|date:"F j, Y, g:i a" }}</small>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="alert alert-info">No Sent Letters at the moment.</p>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -375,7 +576,7 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{% static 'js/user_dashboard.js' %}"></script>
-    {% comment %} <script src="{% static 'js/chat.js' %}"></script> {% endcomment %}
+    <script src="{% static 'js/eventTiny.js' %}"></script>
     <script src="{% static 'js/logout.js' %}"></script>
     {% comment %} <script src="{% static 'js/search-result.js' %}"></script> {% endcomment %}
 

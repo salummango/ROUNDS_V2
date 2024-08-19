@@ -1,0 +1,16 @@
+{% extends "admin/change_form.html" %}
+
+{% block content %}
+  <h1>{{ original.title }}</h1>
+  {% comment %} <p><strong>From:</strong> {{ original.sender }}</p>
+  <p><strong>To:</strong> {{ original.receiver }}</p>
+  <p><strong>Date:</strong> {{ original.created }}</p>
+  <hr> {% endcomment %}
+  <div class="letter-body">
+    {{ original.body|safe }}
+  </div>
+  <hr>
+  <div>
+    <a href="{% url 'admin:Letter_letter_changelist' %}" class="button">Back to Letters</a>
+  </div>
+{% endblock %}

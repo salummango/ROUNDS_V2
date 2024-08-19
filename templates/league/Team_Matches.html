@@ -9,21 +9,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matches for {{ team_name }}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/Team_Matches.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/boostrap.min.css' %}">
 </head>
 
 <body>
     <!-- Header, Nav, and other content -->
+    <header class="site-header d-flex flex-column justify-content-center align-items-center">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-5 col-12 mb-5">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'team_manager_dashboard' %}">Manager Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Club Details</li>
+                        </ol>
+                    </nav>
+                </div>
+    
+                <div class="col-lg-7 col-12 mb-5">
+                    <form action="{% url 'team_matches' %}" method="GET" class="input-group">
+                        <input type="text" name="team_name" class="form-control" placeholder="Search for another team...">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" width="16" height="16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    
     <!-- Search bar for team matches -->
-    <div class="search">
-        <form action="{% url 'team_matches' %}" method="GET">
-            <input type="text" name="team_name" placeholder="Search for another team...">
-            <button type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>
-            </button>
-        </form>
-    </div>
+    
 
     <!-- Content: Team Matches -->
     <div class="content">
@@ -57,7 +77,7 @@
     </div>
 
     
-    <script src="./js/match-result.js"></script>
+    
 </body>
 
 </html>

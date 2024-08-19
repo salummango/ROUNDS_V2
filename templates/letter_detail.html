@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .back-arrow {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .back-arrow a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 20px;
+        }
+        .back-arrow a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        p {
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+        strong {
+            font-weight: bold;
+        }
+        .description {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-arrow">
+            <a href="{% url 'team_manager_dashboard' %}">&larr; Back to Dashboard</a>
+        </div>
+        <h1>{{ details.title }}</h1>
+        <p><strong>From:</strong> {{ details.sender }} <strong>To:</strong> {{ details.receiver }}</p>
+        <p><strong>Date:</strong> {{ details.created }}</p>
+        <div class="description">
+            <strong>LETTER:</strong>
+            <p>{{ details.body|safe }}</p>
+        </div>
+    </div>
+</body>
+</html>

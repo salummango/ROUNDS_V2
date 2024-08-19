@@ -8,7 +8,7 @@ from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 from datetime import datetime
 from django.utils import timezone
-from .AIFixture import generate_data_mined_fixtures,load_historical_data
+# from .AIFixture import generate_data_mined_fixtures,load_historical_data
 
 # def generate_fixtures(modeladmin, request, queryset):
 #     teams = queryset.all()

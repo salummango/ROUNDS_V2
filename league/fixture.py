@@ -1,10 +1,12 @@
-from datetime import datetime, timedelta
 from collections import defaultdict
-import ast  # Import the ast module for safely parsing string literals to Python objects
+import ast
+from datetime import datetime, timedelta
 import random
 import json
 from rule.models import Rule
 from users.models import Team
+
+
 
 def load_rules_from_database():
     """Load rules from the database."""
@@ -19,23 +21,16 @@ def generate_double_round_robin_fixtures(teams, rules):
     start_date_str = rules['LeagueStartDate']
     start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
 
-    fifa_calendar = rules.get('FIFACALENDAR', [])  # Get the FIFA calendar from the rules
+    fifa_calendar_str = rules.get('FIFACALENDAR', '[]')
+    fifa_calendar = json.loads(fifa_calendar_str)
 
-    # Deserialize JSON string to dictionary
     weekend_rule_str = rules['WeekendScheduling']
     try:
         weekend_rule = json.loads(weekend_rule_str)
     except json.JSONDecodeError as e:
-        # Handle the error if the string cannot be parsed
         print(f"Error decoding JSON: {e}")
         weekend_rule = {}
-
-    # Ensure weekend_rule is a dictionary
-    if isinstance(weekend_rule, dict):
-        total_match_days_per_week = sum(weekend_rule.values())
-    else:
-        total_teams = len(teams)
-        total_match_days_per_week = total_teams // 2  # Handle the case where weekend_rule is not a valid dictionary
+    total_match_days_per_week = sum(weekend_rule.values())
 
     rotation_index = 0
 
@@ -95,7 +90,6 @@ def generate_double_round_robin_fixtures(teams, rules):
 
             # Retrieve kick-off times from the rules and parse it into a list
             kick_off_times_str = rules.get('KickOff', '[]')  # Default to empty list if not found
-            
             kick_off_times = ast.literal_eval(kick_off_times_str)  # Parse the string into a list
 
             # Select a random kick-off time from the list
@@ -117,4 +111,3 @@ def generate_double_round_robin_fixtures(teams, rules):
         matches.append(round_matches)
 
     return matches, start_date
-
